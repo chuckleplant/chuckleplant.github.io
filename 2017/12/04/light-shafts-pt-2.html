@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Isaac Hayes Wallpaper Generator - Volumetric light scattering, 2 of 2</title>
+  <meta name="description" content="  Continuation of Isaac Hayes Wallpaper Generator - Volumetric light scattering, 1 of 2  You can go straight to the Wallpaper Generator tool (works best with...">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/2017/12/04/light-shafts-pt-2.html">
+  <link rel="alternate" type="application/rss+xml" title="Chuck LePlant" href="http://localhost:4000/feed.xml">
+  <link rel="stylesheet" type="text/css" href="http://localhost:4000/css/jekyll-photo-gallery.css">
+  <link rel="stylesheet" href="http://localhost:4000/css/justifiedGallery.min.css">
+
+  <script type="text/javascript" async
+   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+    MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } }});
+  </script>
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Chuck LePlant</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+          <a class="page-link" href="/about">About</a>
+          <a class="page-link" href="/photography">Gallery</a>
+          <a class="page-link" href="/archive">Archive</a>
+      
+      </div>
+    </nav>
+
+    
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Isaac Hayes Wallpaper Generator - Volumetric light scattering, 2 of 2</h1>
+    <p class="post-meta"><time datetime="2017-12-04T00:00:00+01:00" itemprop="datePublished">Dec 4, 2017</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <blockquote>
+  <p>Continuation of <a href="/2017/05/28/light-shafts.html">Isaac Hayes Wallpaper Generator - Volumetric light scattering, 1 of 2</a></p>
+
+  <p>You can go straight to the <a href="/emscripten/isaac_hayes_wg/IsaacWallpaper.html">Wallpaper Generator</a> tool (works best with chrome last I tested)</p>
+</blockquote>
+
+<p>Now that covered the basics of light rendering and volumetric light scattering, let’s see how we don’t do any of that and instead cheat to get an approximated result.</p>
+
+<p>A bit like in impressionism, we don’t try to match physical light behaviour objectively, but to emulate what we see in an efficient way. That’s computer graphics in a nutshell.</p>
+
+<h2 id="formulae-summary">Formulae summary</h2>
+
+<p>Rendring equation:</p>
+
+<script type="math/tex; mode=display">{L_{\text{o}}(\mathbf x,\, \omega_{\text{o}})} {\,=\,} {L_e(\mathbf x,\, \omega_{\text{o}})}  {\ +\,}  {\int_\Omega}  {f_r(\mathbf x,\, \omega_{\text{i}},\, \omega_{\text{o}})\,}  {L_{\text{i}}(\mathbf x,\, \omega_{\text{i}})\,}  {(\omega_{\text{i}}\,\cdot\,\mathbf n)\,}  {\operatorname d \omega_{\text{i}}}</script>
+
+<p>Light intensity and extinction constant:</p>
+
+<script type="math/tex; mode=display">I=I_\text{o} · e^{-\tau s}</script>
+
+<p>Light scattering equation:</p>
+
+<script type="math/tex; mode=display">{L(s,\,\theta)}  {\,=\,}  {L_\text{o}}  {e^{-\tau s}}  {\,+\,} \frac{1}{\tau}  {\,E_{sun}}  {\,S(\theta)}  {(1 \,-\, }  {e^{-\tau s}} {)}</script>
+
+<p>Occlusion:</p>
+
+<script type="math/tex; mode=display">L(s,\,\theta,\,\phi) = (1 \,-\, D(\phi)) \,L(s,\,\theta)</script>
+
+<h2 id="accounting-for-occlusion">Accounting for occlusion</h2>
+
+<p>We need to account for all objects occluding each beam of light. For this rendering solution we use only screen space information, so we don’t have any 3D information and cannot compute for each ray whether it was occluded or not. Also keep in mind, that each pixel on screen represents us, the viewer.</p>
+
+<p>Eq. 3 computes, for a whole ray, the accumulated light value based on the media it traverses. What we’ll do is march on screen space, accumulating by sampling along the ray’s path towards any given pixel.</p>
+
+<div class="Container">
+    <div class="Content">
+<img src="/images/cheating-shaft.png" alt="Each dot represents a sample, we omit the samples that have an occluder. This makes the pixels with no ocluders (on screen space) be brighter." />  
+    </div>
+</div>
+<p><span class="caption" style="font-size: 80%"><i>Each dot represents a sample, we omit the samples that have an occluder. This makes the pixels with no ocluders (on screen space) be brighter.</i></span></p>
+
+<h2 id="the-sum">The sum</h2>
+
+<p>We want to compute the light at a given <em>fragment</em> (each small square in the image above), we will sum the energy values sampled along the ray from the light source towards our pixel. We will:</p>
+
+<script type="math/tex; mode=display">L(p) = \sum_{i=0}^n decay^i \times weight \times \frac{L(s,\theta)}{n}</script>
+
+<p>The <script type="math/tex">decay</script> term is a falloff, that attenuates the energy based on the distance to the light source. The <script type="math/tex">weight</script> is the shaft’s intensity<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>.</p>
+
+<p>The further the pixel is from the light source, the dimmer light accumulation is.</p>
+
+<div class="Container">
+    <div class="Content">
+<img src="/images/red-dead-blackness.png" alt="In our first render pass we render just the scene in black and the light source. Note that we paint the sun red in this case so that the light shifts from white at maximum intensity to a dim red (What I like to call dead red)." />  
+    </div>
+</div>
+<p><span class="caption" style="font-size: 80%"><i>In our first render pass we render just the scene in black and the light source. Note that we paint the sun red in this case so that the light shifts from white at maximum intensity to a dim red (What I like to call dead red).</i></span></p>
+
+<div class="Container">
+    <div class="Content">
+<img src="/images/red-dead-scene.png" alt="Our second render pass draws the scene as we want it, in this case just a silhouette with the sun behind it. Note that we draw the sun as a white circle too without the shafts." />  
+    </div>
+</div>
+<p><span class="caption" style="font-size: 80%"><i>Our second render pass draws the scene as we want it, in this case just a silhouette with the sun behind it. Note that we draw the sun as a white circle too without the shafts.</i></span></p>
+
+<div class="Container">
+    <div class="Content">
+<img src="/images/red-dead-shaft.png" alt="Last we run a final pass that samples for each fragment the brightness energy in the direction of the light source. This results in the shafts of light passing through the occluders." />  
+    </div>
+</div>
+<p><span class="caption" style="font-size: 80%"><i>Last we run a final pass that samples for each fragment the brightness energy in the direction of the light source. This results in the shafts of light passing through the occluders.</i></span></p>
+
+<h1 id="application-in-games">Application in games</h1>
+
+<p>It is based on physical effects, but is not by any means physically realistic. The effect is only valid when the light in screen space. The effect disappears completely when the light is either out of view or completely occluded.</p>
+
+<p>But, should games aim for physical realism? I don’t think so. As a means to transmitting emotions to the player, game developers should use any possible trick to do so, visual illusions such as this rather simplistic radial blur are very effective.</p>
+
+<h1 id="isaac-hayes-wallpaper-generator">Isaac Hayes Wallpaper Generator</h1>
+
+<video autoplay="autoplay" loop="loop" width="100%">
+    <source src="/videos/rdrgif.mp4" type="video/mp4" />
+</video>
+
+<p>Whithout further ado I present the <a href="/emscripten/isaac_hayes_wg/IsaacWallpaper.html">Isaac Hayes Wallpaper Generator</a><sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup>. You can tweak light intensity, background color. You can also upload your own image (with transparency) to play with it and pierce your own eyes with the power of the sun, or not, your call.<sup id="fnref:3"><a href="#fn:3" class="footnote">3</a></sup><script type="math/tex">^,</script><sup id="fnref:4"><a href="#fn:4" class="footnote">4</a></sup></p>
+
+<p>It was also an experiment using Emscripten to port C++ code to JavaScript, the toughest was loading files from disk and saving them back. Apparently browsers are not cool with you merrily accessing the file system!</p>
+
+<p>Find all the relevant in the github <a href="https://github.com/chuckleplant/IsaacHayesWG">repository</a>.</p>
+
+<hr />
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>Note that we’ve dropped the exposure term use in Nvidia’s formulation, it just provides more granularity on the <script type="math/tex">weight</script> term. <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p><a href="https://www.youtube.com/watch?v=nFvRvSxsW-I">Recommended soundtrack</a> <a href="#fnref:2" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:3">
+      <p><a href="https://github.com/openframeworks/openFrameworks">Coded using openFrameworks.</a> <a href="#fnref:3" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:4">
+      <p><a href="https://medium.com/community-play-3d/god-rays-whats-that-5a67f26aeac2">Based on Julien Moreau-Mathis: God Rays? What’s that?</a> <a href="#fnref:4" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div>
+   
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+var disqus_config = function () {
+this.page.developer = 1;
+this.page.url = 'http://localhost:4000/2017/12/04/light-shafts-pt-2.html';  
+this.page.identifier = 'Shaft!'; 
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://chuckleplant.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+ 
+</article>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Chuck LePlant</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>Chuck LePlant</li>
+          <li><a href="mailto:sergio.basurco@gmail.com">sergio.basurco@gmail.com</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/chuckleplant"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">chuckleplant</span></a>
+
+          </li>
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>Sergio Basurco's personal portfolio. I'm a software developer based in Barcelona. Have fun browsing my little projects.
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+  <script src="http://localhost:4000/js/vendor/jquery-1.9.1.min.js"></script>
+  <script src="http://localhost:4000/js/plugins/jquery.justifiedGallery.min.js"></script>
+</html>
