@@ -20,4 +20,6 @@ repo = git.Repo(search_parent_directories=True)
 sha = repo.head.object.hexsha
 
 os.chdir(site_dir)
-print 'return code' + call(['git','cma','"deploying from '+sha+'"'])
+
+git_commit_ret = call(['git','cma','"deploying from '+sha+'"'])
+print git_commit_ret
