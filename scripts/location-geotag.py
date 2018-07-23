@@ -57,7 +57,7 @@ def find_closest_in_time(locations, a_location):
 parser = argparse.ArgumentParser()
 parser.add_argument('-j','--json', help='The JSON file containing your location history.', required=True)
 parser.add_argument('-d','--dir', help='Images folder.', required=True)
-parser.add_argument('-t','--time', help='Hours of tolerance.', default=2, required=False)
+parser.add_argument('-t','--time', help='Hours of tolerance.', default=1, required=False)
 args = vars(parser.parse_args())
 locations_file = args['json']
 image_dir = args['dir']
@@ -78,7 +78,6 @@ for location in location_array:
 print 'Reversing locations list'
 my_locations = list(reversed(my_locations))
 
-relevant_path = "[path to folder]"
 included_extenstions = ['jpg', 'JPG', 'jpeg', 'JPEG']
 file_names = [fn for fn in os.listdir(image_dir) if any(fn.endswith(ext) for ext in included_extenstions)]
 

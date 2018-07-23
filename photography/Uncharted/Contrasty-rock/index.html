@@ -71,7 +71,6 @@
 
       <div class="trigger">
           <a class="page-link" href="/about">About</a>
-          <a class="page-link" href="/photography">Gallery</a>
           <a class="page-link" href="/life-drawing">Life Drawing</a>
           <a class="page-link" href="/archive">Archive</a>
       
@@ -256,16 +255,16 @@ s.setAttribute('data-timestamp', +new Date());
   var newimg = document.getElementById('picture');
 
   function getExif() {
-    EXIF.getData(newimg, function() {
-      var orientation = EXIF.getTag(this, "Orientation");
-      if (orientation == 6) {
-        newimg.className = "entry-feature-image rot90";
-      } else if (orientation == 8) {
-        newimg.className = "entry-feature-image rot270";
-      } else if (orientation == 3) {
-        newimg.className = "entry-feature-image rot180";
-      }
-    });
+    //EXIF.getData(newimg, function() {
+    //  var orientation = EXIF.getTag(this, "Orientation");
+    //  if (orientation == 6) {
+    //    newimg.className = "entry-feature-image rot90";
+    //  } else if (orientation == 8) {
+    //    newimg.className = "entry-feature-image rot270";
+    //  } else if (orientation == 3) {
+    //    newimg.className = "entry-feature-image rot180";
+    //  }
+    //});
   };
 
   getExif();
@@ -282,7 +281,7 @@ s.setAttribute('data-timestamp', +new Date());
     var pOffset = $(this).offset();
     var x = e.pageX - pOffset.left;
     if (pWidth / 2 > x) {
-      window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/';
+      window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/P8290732';
     }
     else {
       window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Romantic-comedy-shot';
@@ -292,7 +291,7 @@ s.setAttribute('data-timestamp', +new Date());
   document.onkeydown = function (e) {
     switch (e.keyCode) {
       case 37: //left click
-        window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/';
+        window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/P8290732';
         break;
       case 39: //right click
         window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Romantic-comedy-shot';
