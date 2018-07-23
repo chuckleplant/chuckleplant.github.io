@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Photo geotagging using your Google location history</title>
+  <meta name="description" content="  Who controls the past controls the future. Who controls the present controls the past.">
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="https://chuckleplant.github.io/2018/07/23/google-photos-geotag.html">
+  <link rel="alternate" type="application/rss+xml" title="Chuck LePlant" href="https://chuckleplant.github.io/feed.xml">
+  <link rel="stylesheet" type="text/css" href="https://chuckleplant.github.io/css/jekyll-photo-gallery.css">
+  <link rel="stylesheet" href="https://chuckleplant.github.io/css/justifiedGallery.min.css">
+
+  <script type="text/javascript" async
+   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+    MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } }});
+  </script>
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Chuck LePlant</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+          <a class="page-link" href="/about">About</a>
+          <a class="page-link" href="/photography">Gallery</a>
+          <a class="page-link" href="/life-drawing">Life Drawing</a>
+          <a class="page-link" href="/archive">Archive</a>
+      
+      </div>
+    </nav>
+
+    
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Photo geotagging using your Google location history</h1>
+    <p class="post-meta"><time datetime="2018-07-23T00:00:00+02:00" itemprop="datePublished">Jul 23, 2018</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <blockquote>
+  <p>Who controls the past controls the future. Who controls the present controls the past.</p>
+</blockquote>
+
+<h2 id="where-ive-been">Where I’ve been</h2>
+
+<p>I use Google Photos for keeping the thousands if not hundreds of thousands of pictures I’ve taken over the years. Unlimited storage (I love unlimited stuff) for the price of image compression and probably Google using your photos for machine learning, ads and other orwellian ends.</p>
+
+<div class="Container">
+    <div class="Content">
+<img src="/images/posts/geotag-gphotos.png" alt="Google Photos interface showing a map of where the photo was taken." />  
+    </div>
+</div>
+<p><span class="caption" style="font-size: 80%"><i>Google Photos interface showing a map of where the photo was taken.</i></span></p>
+
+<p>One feature I like is geotagging. Google Photos will use your location history to deduce where the photo was taken. Then they’ll show you a nice map when visiting the image and you’ll go <em>‘Oh look I’ve been there!’</em></p>
+
+<p>However, I noticed that when exporting the photos out of Google, you don’t get the approximate geotag as metadata in your JPEG. This bothers me because the image gallery I’m using also shows you a small map if the image has GPS data in it.</p>
+
+<p>After some research I found that it’s actually not possible to export the geotags. I did find that you can actually download your whole location history, all the location data Google has on you. It’s a lot of data depending on how long you’ve used a smartphone.</p>
+
+<div class="Container">
+    <div class="Content">
+<img src="/images/posts/gdatum.png" alt="Get all the data Google has on you from [https://takeout.google.com/](https://takeout.google.com/). The list goes on and on." />  
+    </div>
+</div>
+<p><span class="caption" style="font-size: 80%"><i>Get all the data Google has on you from <a href="https://takeout.google.com/">https://takeout.google.com/</a>. The list goes on and on.</i></span></p>
+
+<p>So I made a small script that adds the GPS information on any photo using your location history as input. It’s quite simple but works surprisingly well.</p>
+
+<h2 id="script">Script</h2>
+
+<p>The script is written in Python. My location history was around 200Mb, so I wanted an efficient way to search through the whole file.</p>
+
+<p>The Google export looks like this:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"locations"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"timestampMs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1532122858202"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"latitudeE7"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">48445182</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"longitudeE7"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">24287419</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"accuracy"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"altitude"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">117</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"verticalAccuracy"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+  </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"timestampMs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1532122465164"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"latitudeE7"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">439445411</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"longitudeE7"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">26287254</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"accuracy"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"altitude"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">117</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"verticalAccuracy"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+  </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"timestampMs"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1532122068529"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"latitudeE7"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">419945411</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"longitudeE7"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">12287254</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"accuracy"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"altitude"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">117</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"verticalAccuracy"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+  </span><span class="p">}]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>I loaded the JSON and created a custom <code class="highlighter-rouge">Location</code> class which just registered the GPS info and the timestamp. I converted the timestamps to seconds when loading them. I also defined some operators to be able to sort and search the locations list.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#</span>
+<span class="c"># Note I construct directly from the JSON dictionary</span>
+<span class="c">#</span>
+<span class="k">class</span> <span class="nc">Location</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="p">{}):</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s">'timestampMs'</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="o">/</span> <span class="mi">1000</span>
+            <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="s">'latitudeE7'</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">latitude</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="s">'longitudeE7'</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">longitude</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">other</span> <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">timestamp</span>
+    <span class="k">def</span> <span class="nf">__lt__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">other</span> <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">timestamp</span>
+    <span class="k">def</span> <span class="nf">__le__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">other</span> <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">&lt;=</span> <span class="n">other</span><span class="o">.</span><span class="n">timestamp</span>
+    <span class="k">def</span> <span class="nf">__gt__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">other</span> <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">timestamp</span>
+    <span class="k">def</span> <span class="nf">__ge__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">other</span> <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">&gt;=</span> <span class="n">other</span><span class="o">.</span><span class="n">timestamp</span>
+    <span class="k">def</span> <span class="nf">__ne__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">other</span> <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">timestamp</span>
+</code></pre></div></div>
+
+<p>Using the <a href="https://docs.python.org/2/library/bisect.html">bisect</a> python module I could have O(log n) search times, which is as good as I can hope for. I had to reverse the locations because Google exports them in descending timestamp order.</p>
+
+<p>I got the timestamp from my images using PIL black magic <code class="highlighter-rouge">image._getexif()[36867]</code>. And then it was a matter of finding the location with the closest timestamp to my image. From <a href="https://stackoverflow.com/a/12141511/2628257">SO</a>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">find_closest_in_time</span><span class="p">(</span><span class="n">locations</span><span class="p">,</span> <span class="n">a_location</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s">'Finding closest element'</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">bisect_left</span><span class="p">(</span><span class="n">locations</span><span class="p">,</span> <span class="n">a_location</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">pos</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">locations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">pos</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">locations</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">locations</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="n">before</span> <span class="o">=</span> <span class="n">locations</span><span class="p">[</span><span class="n">pos</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">after</span> <span class="o">=</span> <span class="n">locations</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">after</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">-</span> <span class="n">a_location</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">&lt;</span> <span class="n">a_location</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">-</span> <span class="n">before</span><span class="o">.</span><span class="n">timestamp</span><span class="p">:</span>
+       <span class="k">return</span> <span class="n">after</span>
+    <span class="k">else</span><span class="p">:</span>
+       <span class="k">return</span> <span class="n">before</span>
+</code></pre></div></div>
+
+<p>In order to add the GPS information I used the <a href="https://github.com/bennoleslie/pexif">pexif</a> module. Which was designed with geotagging in mind. I also added a time threshold of a couple of hours, any location out of that threshold would be considered inaccurate.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">if</span><span class="p">(</span><span class="n">hours_away</span> <span class="o">&lt;</span> <span class="n">hours_threshold</span><span class="p">):</span>
+        <span class="n">ef</span> <span class="o">=</span> <span class="n">JpegFile</span><span class="o">.</span><span class="n">fromFile</span><span class="p">(</span><span class="n">image_file</span><span class="p">)</span>
+        <span class="n">ef</span><span class="o">.</span><span class="n">set_geo</span><span class="p">(</span><span class="n">lat_f</span><span class="p">,</span> <span class="n">lon_f</span><span class="p">)</span>
+        <span class="n">ef</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="n">image_file</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">'Time threshold surpassed'</span>
+</code></pre></div></div>
+
+<p>The full script can be found <a href="https://gist.github.com/chuckleplant/84b48f5c2cb743013462b6cb5f598f01">here</a>. Make sure to make a backup of your images before running the script!</p>
+
+
+  </div>
+   
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+var disqus_config = function () {
+this.page.developer = 1;
+this.page.url = 'https://chuckleplant.github.io/2018/07/23/google-photos-geotag.html';  
+this.page.identifier = 'geotagPython'; 
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://chuckleplant.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+ 
+</article>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Chuck LePlant</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>Chuck LePlant</li>
+          <li><a href="mailto:sergio.basurco@gmail.com">sergio.basurco@gmail.com</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/chuckleplant"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">chuckleplant</span></a>
+
+          </li>
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>Sergio Basurco's personal portfolio. I'm a software developer based in Barcelona. Have fun browsing my little projects.
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+  <script src="https://chuckleplant.github.io/js/vendor/jquery-1.9.1.min.js"></script>
+  <script src="https://chuckleplant.github.io/js/plugins/jquery.justifiedGallery.min.js"></script>
+</html>
