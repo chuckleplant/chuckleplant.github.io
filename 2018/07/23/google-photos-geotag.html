@@ -71,6 +71,13 @@
   <p>Who controls the past controls the future. Who controls the present controls the past.</p>
 </blockquote>
 
+<p><a href="https://github.com/chuckleplant/blog/blob/master/scripts/location-geotag.py">Here</a>’s a script that runs on Python that can add GPS tags to your photos (jpg) given your Google location history. You have to download the location history from <a href="https://takeout.google.com/">https://takeout.google.com/</a> and run:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python location-geotag.py <span class="nt">--dir</span> <span class="o">{</span>your photos directory<span class="o">}</span> <span class="nt">--json</span> <span class="o">{</span>your location <span class="nb">history</span><span class="o">}</span>
+</code></pre></div></div>
+
+<p>Do <strong>backup</strong> your photos before doing this, you may lose them.</p>
+
 <h2 id="where-ive-been">Where I’ve been</h2>
 
 <p>I use Google Photos for keeping the thousands if not hundreds of thousands of pictures I’ve taken over the years. Unlimited storage (I love unlimited stuff) for the price of image compression and probably Google using your photos for machine learning, ads and other orwellian ends.</p>
@@ -131,6 +138,10 @@
 
 <p>I loaded the JSON and created a custom <code class="highlighter-rouge">Location</code> class which just registered the GPS info and the timestamp. I converted the timestamps to seconds when loading them. I also defined some operators to be able to sort and search the locations list.</p>
 
+<blockquote>
+  <p><em>Update:</em> The current implementation omits altitude because I only cared for the 2D map. I will update the script to include as much GPS information as possible.</p>
+</blockquote>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#</span>
 <span class="c"># Note I construct directly from the JSON dictionary</span>
 <span class="c">#</span>
@@ -178,17 +189,35 @@
        <span class="k">return</span> <span class="n">before</span>
 </code></pre></div></div>
 
-<p>In order to add the GPS information I used the <a href="https://github.com/bennoleslie/pexif">pexif</a> module. Which was designed with geotagging in mind. I also added a time threshold of a couple of hours, any location out of that threshold would be considered inaccurate.</p>
+<p>In order to add the GPS information I used the <a href="https://github.com/bennoleslie/pexif">pexif</a> module at first. But I found that the Exif data written by the module was sometimes broken. I switched to <a href="https://pypi.org/project/piexif/">piexif</a>, which does basically the same. The documentation however was a bit harder to bite, luckily I found <a href="https://gist.github.com/c060604/8a51f8999be12fc2be498e9ca56adc72">this gist</a> that showed how to embed GPS data via exif.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">if</span><span class="p">(</span><span class="n">hours_away</span> <span class="o">&lt;</span> <span class="n">hours_threshold</span><span class="p">):</span>
-        <span class="n">ef</span> <span class="o">=</span> <span class="n">JpegFile</span><span class="o">.</span><span class="n">fromFile</span><span class="p">(</span><span class="n">image_file</span><span class="p">)</span>
-        <span class="n">ef</span><span class="o">.</span><span class="n">set_geo</span><span class="p">(</span><span class="n">lat_f</span><span class="p">,</span> <span class="n">lon_f</span><span class="p">)</span>
-        <span class="n">ef</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="n">image_file</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">print</span> <span class="s">'Time threshold surpassed'</span>
+<p>I also added a time threshold of a couple of hours, any location out of that threshold would be considered inaccurate.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#</span>
+<span class="c"># piexif library usage to add GPS info to an image</span>
+<span class="c">#</span>
+<span class="k">if</span><span class="p">(</span><span class="n">hours_away</span> <span class="o">&lt;</span> <span class="n">hours_threshold</span><span class="p">):</span>
+    <span class="n">exif_dict</span> <span class="o">=</span> <span class="n">piexif</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">image_file</span><span class="p">)</span>    
+    <span class="n">exif_dict</span><span class="p">[</span><span class="s">"GPS"</span><span class="p">][</span><span class="n">piexif</span><span class="o">.</span><span class="n">GPSIFD</span><span class="o">.</span><span class="n">GPSVersionID</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">exif_dict</span><span class="p">[</span><span class="s">"GPS"</span><span class="p">][</span><span class="n">piexif</span><span class="o">.</span><span class="n">GPSIFD</span><span class="o">.</span><span class="n">GPSAltitudeRef</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">exif_dict</span><span class="p">[</span><span class="s">"GPS"</span><span class="p">][</span><span class="n">piexif</span><span class="o">.</span><span class="n">GPSIFD</span><span class="o">.</span><span class="n">GPSLatitudeRef</span><span class="p">]</span> <span class="o">=</span> <span class="s">'S'</span> <span class="k">if</span> <span class="n">lat_f</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s">'N'</span>
+    <span class="n">exif_dict</span><span class="p">[</span><span class="s">"GPS"</span><span class="p">][</span><span class="n">piexif</span><span class="o">.</span><span class="n">GPSIFD</span><span class="o">.</span><span class="n">GPSLongitudeRef</span><span class="p">]</span> <span class="o">=</span> <span class="s">'W'</span> <span class="k">if</span> <span class="n">lon_f</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s">'E'</span>
+
+    <span class="n">lat_deg</span> <span class="o">=</span> <span class="n">to_deg</span><span class="p">(</span><span class="n">lat_f</span><span class="p">,</span> <span class="p">[</span><span class="s">"S"</span><span class="p">,</span> <span class="s">"N"</span><span class="p">])</span>
+    <span class="n">lng_deg</span> <span class="o">=</span> <span class="n">to_deg</span><span class="p">(</span><span class="n">lon_f</span><span class="p">,</span> <span class="p">[</span><span class="s">"W"</span><span class="p">,</span> <span class="s">"E"</span><span class="p">])</span>
+    <span class="n">exiv_lat</span> <span class="o">=</span> <span class="p">(</span><span class="n">change_to_rational</span><span class="p">(</span><span class="n">lat_deg</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">change_to_rational</span><span class="p">(</span><span class="n">lat_deg</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">change_to_rational</span><span class="p">(</span><span class="n">lat_deg</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+    <span class="n">exiv_lng</span> <span class="o">=</span> <span class="p">(</span><span class="n">change_to_rational</span><span class="p">(</span><span class="n">lng_deg</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">change_to_rational</span><span class="p">(</span><span class="n">lng_deg</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">change_to_rational</span><span class="p">(</span><span class="n">lng_deg</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+
+    <span class="n">exif_dict</span><span class="p">[</span><span class="s">"GPS"</span><span class="p">][</span><span class="n">piexif</span><span class="o">.</span><span class="n">GPSIFD</span><span class="o">.</span><span class="n">GPSLatitude</span><span class="p">]</span> <span class="o">=</span> <span class="n">exiv_lat</span>
+    <span class="n">exif_dict</span><span class="p">[</span><span class="s">"GPS"</span><span class="p">][</span><span class="n">piexif</span><span class="o">.</span><span class="n">GPSIFD</span><span class="o">.</span><span class="n">GPSLongitude</span><span class="p">]</span> <span class="o">=</span> <span class="n">exiv_lng</span>
+    
+    <span class="n">exif_bytes</span> <span class="o">=</span> <span class="n">piexif</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">exif_dict</span><span class="p">)</span>
+    <span class="n">image</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">image_file</span><span class="p">,</span> <span class="n">exif</span><span class="o">=</span><span class="n">exif_bytes</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span> <span class="s">'Time threshold surpassed'</span>
 </code></pre></div></div>
 
-<p>The full script can be found <a href="https://gist.github.com/chuckleplant/84b48f5c2cb743013462b6cb5f598f01">here</a>. Make sure to make a backup of your images before running the script!</p>
+<p>The full script can be found <a href="https://github.com/chuckleplant/blog/blob/master/scripts/location-geotag.py">here</a>. Make sure to make a backup of your images before running the script!</p>
 
 
   </div>
