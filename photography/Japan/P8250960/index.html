@@ -308,42 +308,21 @@ s.setAttribute('data-timestamp', +new Date());
   var nextButton = $("#next-button");
 
 
-<<<<<<< HEAD
   prevButton.click(function (e) {
     window.location.href = 'https://chuckleplant.github.io/photography/Japan/P8260653';
   });
 
   nextButton.click(function (e) {
     window.location.href = 'https://chuckleplant.github.io/photography/Japan/P8291127';
-=======
-  picture.click(function (e) {
-    var pWidth = $(this).innerWidth();
-    var pOffset = $(this).offset();
-    var x = e.pageX - pOffset.left;
-    if (pWidth / 2 > x) {
-      window.location.href = 'https://chuckleplant.github.io/photography/Japan/P8250959';
-    }
-    else {
-      window.location.href = 'https://chuckleplant.github.io/photography/Japan/P8250987';
-    }
->>>>>>> 8a31bd6c698ced005831ef4057cd8d98a1313004
   });
 
   document.onkeydown = function (e) {
     switch (e.keyCode) {
-<<<<<<< HEAD
       case 37: //left
         window.location.href = 'https://chuckleplant.github.io/photography/Japan/P8260653';
         break;
       case 39: //right
         window.location.href = 'https://chuckleplant.github.io/photography/Japan/P8291127';
-=======
-      case 37: //left click
-        window.location.href = 'https://chuckleplant.github.io/photography/Japan/P8250959';
-        break;
-      case 39: //right click
-        window.location.href = 'https://chuckleplant.github.io/photography/Japan/P8250987';
->>>>>>> 8a31bd6c698ced005831ef4057cd8d98a1313004
         break;
     }
   };
