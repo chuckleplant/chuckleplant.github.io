@@ -22,6 +22,7 @@
 
   <link href="https://chuckleplant.github.io/atom.xml" type="application/atom+xml" rel="alternate" title="Chuck LePlant Atom Feed">
   <link href="https://chuckleplant.github.io/sitemap.xml" type="application/xml" rel="sitemap" title="Sitemap">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/brands.css" integrity="sha384-SYNjKRRe+vDW0KSn/LrkhG++hqCLJg9ev1jIh8CHKuEA132pgAz+WofmKAhPpTR7" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/fontawesome.css" integrity="sha384-0b7ERybvrT5RZyD80ojw6KNKz6nIAlgOKXIcJ0CV7A6Iia8yt2y1bBfLBOwoc9fQ" crossorigin="anonymous">
   <meta name="HandheldFriendly" content="True">
@@ -71,6 +72,7 @@
 
       <div class="trigger">
           <a class="page-link" href="/about">About</a>
+          <a class="page-link" href="/albums">Albums</a>
           <a class="page-link" href="/life-drawing">Life Drawing</a>
           <a class="page-link" href="/archive">Archive</a>
       
@@ -101,22 +103,38 @@
   <article>
     <div class="photoPageContainer" itemscope itemtype="http://schema.org/Photograph">
 
-      <!-- Schema.org BlogPost Invisible Meta-Data -->
-      <meta itemprop="license" content="http://creativecommons.org/licenses/by-nc-sa/4.0/"/>
-      <meta itemprop="author" content="Sergio Basurco"/>
-      <meta itemprop="inLanguage" content="en-US"/>
-      <meta itemprop="url" content="https://chuckleplant.github.io/photography/Japan/P8310047/"/>
-      <meta itemprop="name" content="P8310047"/>
-      <meta itemprop="image" content="https://chuckleplant.github.io/images/photography/Japan/P8310047.jpg"/>
-      <meta itemprop="thumbnailUrl" content="https://chuckleplant.github.io/images/photography/thumbnails/Japan/P8310047.jpg"/>
-      <meta itemprop="description" content=""/>
+      <div class="photo-buttons">
 
-      
-      <img id="picture" 
-            src="https://chuckleplant.github.io/images/photography/Japan/P8310047.jpg" 
-            alt="P8310047">
-      
 
+        <!-- Schema.org BlogPost Invisible Meta-Data -->
+        <meta itemprop="license" content="http://creativecommons.org/licenses/by-nc-sa/4.0/"/>
+        <meta itemprop="author" content="Sergio Basurco"/>
+        <meta itemprop="inLanguage" content="en-US"/>
+        <meta itemprop="url" content="https://chuckleplant.github.io/photography/Japan/P8310047/"/>
+        <meta itemprop="name" content="P8310047"/>
+        <meta itemprop="image" content="https://chuckleplant.github.io/images/photography/Japan/P8310047.jpg"/>
+        <meta itemprop="thumbnailUrl" content="https://chuckleplant.github.io/images/photography/thumbnails/Japan/P8310047.jpg"/>
+        <meta itemprop="description" content=""/>
+        <img id="picture" 
+              src="https://chuckleplant.github.io/images/photography/Japan/P8310047.jpg" 
+              alt="P8310047">
+        <div id="next-button" class="button-stripe-right"> 
+          <div class="but-container">
+              <a href="#" class="arrow-icon">
+                <i class="far fa-arrow-alt-circle-right"></i>
+                <i class="fas fa-arrow-alt-circle-right"></i>
+              </a>            
+          </div>
+        </div>
+        <div id="prev-button" class="button-stripe-left"> 
+          <div class="but-container">
+            <a href="#" class="arrow-icon">
+              <i class="far fa-arrow-alt-circle-left"></i>
+              <i class="fas fa-arrow-alt-circle-left"></i>
+            </a>
+          </div>
+        </div>
+      </div>  
     </div>
   </article>
   <div class="wrapper">
@@ -286,26 +304,24 @@ s.setAttribute('data-timestamp', +new Date());
 <script>
   var photo = $("#photo");
   var picture = $("#picture");
+  var prevButton = $("#prev-button");
+  var nextButton = $("#next-button");
 
 
-  picture.click(function (e) {
-    var pWidth = $(this).innerWidth();
-    var pOffset = $(this).offset();
-    var x = e.pageX - pOffset.left;
-    if (pWidth / 2 > x) {
-      window.location.href = 'https://chuckleplant.github.io/photography/Japan/P8280440';
-    }
-    else {
-      window.location.href = 'https://chuckleplant.github.io/photography/Japan/P9050042';
-    }
+  prevButton.click(function (e) {
+    window.location.href = 'https://chuckleplant.github.io/photography/Japan/P8280440';
+  });
+
+  nextButton.click(function (e) {
+    window.location.href = 'https://chuckleplant.github.io/photography/Japan/P9050042';
   });
 
   document.onkeydown = function (e) {
     switch (e.keyCode) {
-      case 37: //left click
+      case 37: //left
         window.location.href = 'https://chuckleplant.github.io/photography/Japan/P8280440';
         break;
-      case 39: //right click
+      case 39: //right
         window.location.href = 'https://chuckleplant.github.io/photography/Japan/P9050042';
         break;
     }
