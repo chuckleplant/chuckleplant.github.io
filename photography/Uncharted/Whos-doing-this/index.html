@@ -296,21 +296,42 @@ s.setAttribute('data-timestamp', +new Date());
   var nextButton = $("#next-button");
 
 
+<<<<<<< HEAD
   prevButton.click(function (e) {
     window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Nature-finds-a-way';
   });
 
   nextButton.click(function (e) {
     window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Soft-light';
+=======
+  picture.click(function (e) {
+    var pWidth = $(this).innerWidth();
+    var pOffset = $(this).offset();
+    var x = e.pageX - pOffset.left;
+    if (pWidth / 2 > x) {
+      window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Whats-that-smell';
+    }
+    else {
+      window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Windy-rain';
+    }
+>>>>>>> 8a31bd6c698ced005831ef4057cd8d98a1313004
   });
 
   document.onkeydown = function (e) {
     switch (e.keyCode) {
+<<<<<<< HEAD
       case 37: //left
         window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Nature-finds-a-way';
         break;
       case 39: //right
         window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Soft-light';
+=======
+      case 37: //left click
+        window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Whats-that-smell';
+        break;
+      case 39: //right click
+        window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Windy-rain';
+>>>>>>> 8a31bd6c698ced005831ef4057cd8d98a1313004
         break;
     }
   };

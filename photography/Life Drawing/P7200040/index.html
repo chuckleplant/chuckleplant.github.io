@@ -296,18 +296,36 @@ s.setAttribute('data-timestamp', +new Date());
   var nextButton = $("#next-button");
 
 
+<<<<<<< HEAD
   prevButton.click(function (e) {
     window.location.href = 'https://chuckleplant.github.io/photography/Life Drawing/P7200054';
   });
 
   nextButton.click(function (e) {
     window.location.href = 'https://chuckleplant.github.io/photography/Life Drawing/P7200041';
+=======
+  picture.click(function (e) {
+    var pWidth = $(this).innerWidth();
+    var pOffset = $(this).offset();
+    var x = e.pageX - pOffset.left;
+    if (pWidth / 2 > x) {
+      window.location.href = 'https://chuckleplant.github.io/photography/Life Drawing/P7200039';
+    }
+    else {
+      window.location.href = 'https://chuckleplant.github.io/photography/Life Drawing/P7200041';
+    }
+>>>>>>> 8a31bd6c698ced005831ef4057cd8d98a1313004
   });
 
   document.onkeydown = function (e) {
     switch (e.keyCode) {
+<<<<<<< HEAD
       case 37: //left
         window.location.href = 'https://chuckleplant.github.io/photography/Life Drawing/P7200054';
+=======
+      case 37: //left click
+        window.location.href = 'https://chuckleplant.github.io/photography/Life Drawing/P7200039';
+>>>>>>> 8a31bd6c698ced005831ef4057cd8d98a1313004
         break;
       case 39: //right
         window.location.href = 'https://chuckleplant.github.io/photography/Life Drawing/P7200041';
