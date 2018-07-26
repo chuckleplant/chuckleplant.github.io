@@ -102,7 +102,7 @@
 <div id="page-content" class="animsition">
   <article>
     <div class="photoPageContainer" itemscope itemtype="http://schema.org/Photograph">
-
+      
       <div class="photo-buttons">
 
 
@@ -118,22 +118,19 @@
         <img id="picture" 
               src="https://chuckleplant.github.io/images/photography/Uncharted/A little dance.jpg" 
               alt="A little dance">
+
+        
         <div id="next-button" class="button-stripe-right"> 
           <div class="but-container">
-              <a href="#" class="arrow-icon">
+              <span class="arrow-icon arrow-right">
                 <i class="far fa-arrow-alt-circle-right"></i>
                 <i class="fas fa-arrow-alt-circle-right"></i>
-              </a>            
+              </span>            
           </div>
         </div>
-        <div id="prev-button" class="button-stripe-left"> 
-          <div class="but-container">
-            <a href="#" class="arrow-icon">
-              <i class="far fa-arrow-alt-circle-left"></i>
-              <i class="fas fa-arrow-alt-circle-left"></i>
-            </a>
-          </div>
-        </div>
+        
+
+        
       </div>  
     </div>
   </article>
@@ -296,18 +293,24 @@ s.setAttribute('data-timestamp', +new Date());
   var nextButton = $("#next-button");
 
 
-  prevButton.click(function (e) {
-    window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/P9091456';
-  });
-
-  nextButton.click(function (e) {
-    window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/An-eye';
-  });
+  if(prevButton != null)
+  {
+    prevButton.click(function (e) {
+        window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/';    
+    });
+  }
+  
+  if(nextButton != null)
+  {
+    nextButton.click(function (e) {
+      window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/An-eye';
+    });
+  }
 
   document.onkeydown = function (e) {
     switch (e.keyCode) {
       case 37: //left
-        window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/P9091456';
+        window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/';
         break;
       case 39: //right
         window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/An-eye';

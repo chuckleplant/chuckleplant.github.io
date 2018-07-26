@@ -102,7 +102,7 @@
 <div id="page-content" class="animsition">
   <article>
     <div class="photoPageContainer" itemscope itemtype="http://schema.org/Photograph">
-
+      
       <div class="photo-buttons">
 
 
@@ -118,22 +118,28 @@
         <img id="picture" 
               src="https://chuckleplant.github.io/images/photography/Uncharted/Fresh 90's album.jpg" 
               alt="Fresh 90's album">
+
+        
         <div id="next-button" class="button-stripe-right"> 
           <div class="but-container">
-              <a href="#" class="arrow-icon">
+              <span class="arrow-icon arrow-right">
                 <i class="far fa-arrow-alt-circle-right"></i>
                 <i class="fas fa-arrow-alt-circle-right"></i>
-              </a>            
+              </span>            
           </div>
         </div>
+        
+
+        
         <div id="prev-button" class="button-stripe-left"> 
           <div class="but-container">
-            <a href="#" class="arrow-icon">
+            <span class="arrow-icon arrow-left">
               <i class="far fa-arrow-alt-circle-left"></i>
               <i class="fas fa-arrow-alt-circle-left"></i>
-            </a>
+            </span>
           </div>
         </div>
+        
       </div>  
     </div>
   </article>
@@ -296,13 +302,19 @@ s.setAttribute('data-timestamp', +new Date());
   var nextButton = $("#next-button");
 
 
-  prevButton.click(function (e) {
-    window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Flowers-under-arc';
-  });
-
-  nextButton.click(function (e) {
-    window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Fulfilled';
-  });
+  if(prevButton != null)
+  {
+    prevButton.click(function (e) {
+        window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Flowers-under-arc';    
+    });
+  }
+  
+  if(nextButton != null)
+  {
+    nextButton.click(function (e) {
+      window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Fulfilled';
+    });
+  }
 
   document.onkeydown = function (e) {
     switch (e.keyCode) {
