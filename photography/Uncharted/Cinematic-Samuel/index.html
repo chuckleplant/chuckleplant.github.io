@@ -319,10 +319,15 @@ s.setAttribute('data-timestamp', +new Date());
   document.onkeydown = function (e) {
     switch (e.keyCode) {
       case 37: //left
-        window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Chilly';
+        if('Chilly' !="")
+        {
+          window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Chilly';
+        }
         break;
       case 39: //right
-        window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Cinematic-dialogue-Nate';
+        if('Cinematic-dialogue-Nate' !=""){ 
+          window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Cinematic-dialogue-Nate';
+        }
         break;
     }
   };

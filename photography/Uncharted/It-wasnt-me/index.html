@@ -319,10 +319,15 @@ s.setAttribute('data-timestamp', +new Date());
   document.onkeydown = function (e) {
     switch (e.keyCode) {
       case 37: //left
-        window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/I-wanted-the-walky';
+        if('I-wanted-the-walky' !="")
+        {
+          window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/I-wanted-the-walky';
+        }
         break;
       case 39: //right
-        window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Jungle-arc';
+        if('Jungle-arc' !=""){ 
+          window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Jungle-arc';
+        }
         break;
     }
   };

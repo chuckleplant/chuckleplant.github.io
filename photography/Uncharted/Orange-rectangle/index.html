@@ -319,10 +319,15 @@ s.setAttribute('data-timestamp', +new Date());
   document.onkeydown = function (e) {
     switch (e.keyCode) {
       case 37: //left
-        window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Once-cozy-always-cozy';
+        if('Once-cozy-always-cozy' !="")
+        {
+          window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Once-cozy-always-cozy';
+        }
         break;
       case 39: //right
-        window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Plant-over-hole';
+        if('Plant-over-hole' !=""){ 
+          window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Plant-over-hole';
+        }
         break;
     }
   };

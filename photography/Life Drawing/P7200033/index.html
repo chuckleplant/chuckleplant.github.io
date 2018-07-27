@@ -319,10 +319,15 @@ s.setAttribute('data-timestamp', +new Date());
   document.onkeydown = function (e) {
     switch (e.keyCode) {
       case 37: //left
-        window.location.href = 'https://chuckleplant.github.io/photography/Life Drawing/P7200032';
+        if('P7200032' !="")
+        {
+          window.location.href = 'https://chuckleplant.github.io/photography/Life Drawing/P7200032';
+        }
         break;
       case 39: //right
-        window.location.href = 'https://chuckleplant.github.io/photography/Life Drawing/P7200034';
+        if('P7200034' !=""){ 
+          window.location.href = 'https://chuckleplant.github.io/photography/Life Drawing/P7200034';
+        }
         break;
     }
   };

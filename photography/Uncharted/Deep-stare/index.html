@@ -319,10 +319,15 @@ s.setAttribute('data-timestamp', +new Date());
   document.onkeydown = function (e) {
     switch (e.keyCode) {
       case 37: //left
-        window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Cross-in-field';
+        if('Cross-in-field' !="")
+        {
+          window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Cross-in-field';
+        }
         break;
       case 39: //right
-        window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Defaced-library';
+        if('Defaced-library' !=""){ 
+          window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Defaced-library';
+        }
         break;
     }
   };

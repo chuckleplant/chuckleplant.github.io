@@ -319,10 +319,15 @@ s.setAttribute('data-timestamp', +new Date());
   document.onkeydown = function (e) {
     switch (e.keyCode) {
       case 37: //left
-        window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/The-bear';
+        if('The-bear' !="")
+        {
+          window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/The-bear';
+        }
         break;
       case 39: //right
-        window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Tombstones';
+        if('Tombstones' !=""){ 
+          window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Tombstones';
+        }
         break;
     }
   };

@@ -319,10 +319,15 @@ s.setAttribute('data-timestamp', +new Date());
   document.onkeydown = function (e) {
     switch (e.keyCode) {
       case 37: //left
-        window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Wet-and-red';
+        if('Wet-and-red' !="")
+        {
+          window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Wet-and-red';
+        }
         break;
       case 39: //right
-        window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Whos-doing-this';
+        if('Whos-doing-this' !=""){ 
+          window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Whos-doing-this';
+        }
         break;
     }
   };

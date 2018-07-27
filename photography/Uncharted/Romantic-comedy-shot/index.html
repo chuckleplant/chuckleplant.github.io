@@ -319,10 +319,15 @@ s.setAttribute('data-timestamp', +new Date());
   document.onkeydown = function (e) {
     switch (e.keyCode) {
       case 37: //left
-        window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Rock';
+        if('Rock' !="")
+        {
+          window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Rock';
+        }
         break;
       case 39: //right
-        window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Sepia-or-cloudy-sunset';
+        if('Sepia-or-cloudy-sunset' !=""){ 
+          window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Sepia-or-cloudy-sunset';
+        }
         break;
     }
   };

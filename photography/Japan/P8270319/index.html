@@ -331,10 +331,15 @@ s.setAttribute('data-timestamp', +new Date());
   document.onkeydown = function (e) {
     switch (e.keyCode) {
       case 37: //left
-        window.location.href = 'https://chuckleplant.github.io/photography/Japan/P8270298';
+        if('P8270298' !="")
+        {
+          window.location.href = 'https://chuckleplant.github.io/photography/Japan/P8270298';
+        }
         break;
       case 39: //right
-        window.location.href = 'https://chuckleplant.github.io/photography/Japan/P8270323';
+        if('P8270323' !=""){ 
+          window.location.href = 'https://chuckleplant.github.io/photography/Japan/P8270323';
+        }
         break;
     }
   };

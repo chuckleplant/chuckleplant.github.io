@@ -319,10 +319,15 @@ s.setAttribute('data-timestamp', +new Date());
   document.onkeydown = function (e) {
     switch (e.keyCode) {
       case 37: //left
-        window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Flowers-under-arc';
+        if('Flowers-under-arc' !="")
+        {
+          window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Flowers-under-arc';
+        }
         break;
       case 39: //right
-        window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Fulfilled';
+        if('Fulfilled' !=""){ 
+          window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Fulfilled';
+        }
         break;
     }
   };

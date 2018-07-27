@@ -319,10 +319,15 @@ s.setAttribute('data-timestamp', +new Date());
   document.onkeydown = function (e) {
     switch (e.keyCode) {
       case 37: //left
-        window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Humid-landscape-and-scary-rock';
+        if('Humid-landscape-and-scary-rock' !="")
+        {
+          window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Humid-landscape-and-scary-rock';
+        }
         break;
       case 39: //right
-        window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/I-wanted-the-walky';
+        if('I-wanted-the-walky' !=""){ 
+          window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/I-wanted-the-walky';
+        }
         break;
     }
   };

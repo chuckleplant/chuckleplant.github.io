@@ -319,10 +319,15 @@ s.setAttribute('data-timestamp', +new Date());
   document.onkeydown = function (e) {
     switch (e.keyCode) {
       case 37: //left
-        window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Corridor';
+        if('Corridor' !="")
+        {
+          window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Corridor';
+        }
         break;
       case 39: //right
-        window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Deep-stare';
+        if('Deep-stare' !=""){ 
+          window.location.href = 'https://chuckleplant.github.io/photography/Uncharted/Deep-stare';
+        }
         break;
     }
   };
