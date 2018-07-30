@@ -25,12 +25,26 @@
     float: right;
 }
 
+
 .photoPageContainer {
     background-color:#131313;                
     object-fit: fill;     
     text-align: center;
 }
 
+
+
+.cc40-div{
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+/*
+.cc40-div a{
+    
+    position: absolute;
+    bottom: 0;
+}
+*/
 
 .photo-buttons{
     position: relative;
@@ -123,34 +137,14 @@ right: 15px;
 }
 
 
-/*
-.photoInfoContainer {    
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 20px;    
-    display: flex;
-    flex-direction: row;
-}
-
-.photoInfo1 {    
-    margin-top: 20px;
-    margin-bottom: 20px;
-    flex-grow: 1;
-}
-
-.photoInfo2 {
-    margin-top: 20px;
-    list-style-type: none;
-    margin-bottom: 20px;  
-    width: 20%;    
-}
-*/
 
 .gmap-photo{
-    /*max-width: 400px;*/
+    border-radius: 4px 4px 4px 4px;
     object-fit: cover;
     overflow: hidden;
     flex-grow: 1;
+   /* max-width: 100%;    */
+    width: 100%;
 }
 
 @media only screen and (max-width: 880px) {
@@ -160,13 +154,6 @@ right: 15px;
     }
 }
 
-/*
-@media only screen and (max-width: 600px) {
-    .gmap-photo {        
-        max-width: 100%;
-    }
-}
-*/
 
 div.photoInfo2 ul {
     list-style-type: none;
