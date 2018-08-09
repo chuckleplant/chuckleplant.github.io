@@ -109,15 +109,6 @@
           
 
           
-          <div id="prev-button" class="button-stripe-left"> 
-            <div class="but-container">
-              <span class="arrow-icon arrow-left">
-                <i class="far fa-arrow-alt-circle-left"></i>
-                <i class="fas fa-arrow-alt-circle-left"></i>
-              </span>
-            </div>
-          </div>
-          
         </div>  
       </div>
     </article>
@@ -271,28 +262,28 @@ s.setAttribute('data-timestamp', +new Date());
     if(prevButton != null)
     {
       prevButton.click(function (e) {
-          window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Cross-in-field';    
+          window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/';    
       });
     }
     
     if(nextButton != null)
     {
       nextButton.click(function (e) {
-        window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Defaced-library';
+        window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/No-you-didnt';
       });
     }
 
     document.onkeydown = function (e) {
       switch (e.keyCode) {
         case 37: //left
-          if('Cross-in-field' !="")
+          if('' !="")
           {
-            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Cross-in-field';
+            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/';
           }
           break;
         case 39: //right
-          if('Defaced-library' !=""){ 
-            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Defaced-library';
+          if('No-you-didnt' !=""){ 
+            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/No-you-didnt';
           }
           break;
       }

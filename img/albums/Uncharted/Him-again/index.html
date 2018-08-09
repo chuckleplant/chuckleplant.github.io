@@ -271,28 +271,28 @@ s.setAttribute('data-timestamp', +new Date());
     if(prevButton != null)
     {
       prevButton.click(function (e) {
-          window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Hallway-light';    
+          window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Defaced-library';    
       });
     }
     
     if(nextButton != null)
     {
       nextButton.click(function (e) {
-        window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Humid-landscape-and-scary-rock';
+        window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Moonlight';
       });
     }
 
     document.onkeydown = function (e) {
       switch (e.keyCode) {
         case 37: //left
-          if('Hallway-light' !="")
+          if('Defaced-library' !="")
           {
-            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Hallway-light';
+            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Defaced-library';
           }
           break;
         case 39: //right
-          if('Humid-landscape-and-scary-rock' !=""){ 
-            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Humid-landscape-and-scary-rock';
+          if('Moonlight' !=""){ 
+            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Moonlight';
           }
           break;
       }

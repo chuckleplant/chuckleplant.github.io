@@ -271,28 +271,28 @@ s.setAttribute('data-timestamp', +new Date());
     if(prevButton != null)
     {
       prevButton.click(function (e) {
-          window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Stormy-weather';    
+          window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Lighter';    
       });
     }
     
     if(nextButton != null)
     {
       nextButton.click(function (e) {
-        window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/The-bear';
+        window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/A-little-dance';
       });
     }
 
     document.onkeydown = function (e) {
       switch (e.keyCode) {
         case 37: //left
-          if('Stormy-weather' !="")
+          if('Lighter' !="")
           {
-            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Stormy-weather';
+            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Lighter';
           }
           break;
         case 39: //right
-          if('The-bear' !=""){ 
-            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/The-bear';
+          if('A-little-dance' !=""){ 
+            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/A-little-dance';
           }
           break;
       }

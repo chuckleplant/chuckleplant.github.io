@@ -271,28 +271,28 @@ s.setAttribute('data-timestamp', +new Date());
     if(prevButton != null)
     {
       prevButton.click(function (e) {
-          window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Moonlight';    
+          window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Nature-finds-a-way';    
       });
     }
     
     if(nextButton != null)
     {
       nextButton.click(function (e) {
-        window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Nate-swimming';
+        window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Once-cozy-always-cozy';
       });
     }
 
     document.onkeydown = function (e) {
       switch (e.keyCode) {
         case 37: //left
-          if('Moonlight' !="")
+          if('Nature-finds-a-way' !="")
           {
-            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Moonlight';
+            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Nature-finds-a-way';
           }
           break;
         case 39: //right
-          if('Nate-swimming' !=""){ 
-            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Nate-swimming';
+          if('Once-cozy-always-cozy' !=""){ 
+            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Once-cozy-always-cozy';
           }
           break;
       }

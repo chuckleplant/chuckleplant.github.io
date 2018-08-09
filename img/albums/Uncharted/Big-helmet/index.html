@@ -271,28 +271,28 @@ s.setAttribute('data-timestamp', +new Date());
     if(prevButton != null)
     {
       prevButton.click(function (e) {
-          window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Arcway';    
+          window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Blinded';    
       });
     }
     
     if(nextButton != null)
     {
       nextButton.click(function (e) {
-        window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Blinded-again';
+        window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/The-smallest-island';
       });
     }
 
     document.onkeydown = function (e) {
       switch (e.keyCode) {
         case 37: //left
-          if('Arcway' !="")
+          if('Blinded' !="")
           {
-            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Arcway';
+            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Blinded';
           }
           break;
         case 39: //right
-          if('Blinded-again' !=""){ 
-            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Blinded-again';
+          if('The-smallest-island' !=""){ 
+            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/The-smallest-island';
           }
           break;
       }

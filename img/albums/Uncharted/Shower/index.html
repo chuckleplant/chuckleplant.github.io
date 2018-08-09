@@ -271,28 +271,28 @@ s.setAttribute('data-timestamp', +new Date());
     if(prevButton != null)
     {
       prevButton.click(function (e) {
-          window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Sepia-or-cloudy-sunset';    
+          window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Grainy-mountain';    
       });
     }
     
     if(nextButton != null)
     {
       nextButton.click(function (e) {
-        window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Soft-light';
+        window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Whos-doing-this';
       });
     }
 
     document.onkeydown = function (e) {
       switch (e.keyCode) {
         case 37: //left
-          if('Sepia-or-cloudy-sunset' !="")
+          if('Grainy-mountain' !="")
           {
-            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Sepia-or-cloudy-sunset';
+            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Grainy-mountain';
           }
           break;
         case 39: //right
-          if('Soft-light' !=""){ 
-            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Soft-light';
+          if('Whos-doing-this' !=""){ 
+            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Whos-doing-this';
           }
           break;
       }

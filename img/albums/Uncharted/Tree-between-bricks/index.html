@@ -271,28 +271,28 @@ s.setAttribute('data-timestamp', +new Date());
     if(prevButton != null)
     {
       prevButton.click(function (e) {
-          window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Tombstones';    
+          window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/National-geographic';    
       });
     }
     
     if(nextButton != null)
     {
       nextButton.click(function (e) {
-        window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Underwater-arc';
+        window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Zenit-jump';
       });
     }
 
     document.onkeydown = function (e) {
       switch (e.keyCode) {
         case 37: //left
-          if('Tombstones' !="")
+          if('National-geographic' !="")
           {
-            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Tombstones';
+            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/National-geographic';
           }
           break;
         case 39: //right
-          if('Underwater-arc' !=""){ 
-            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Underwater-arc';
+          if('Zenit-jump' !=""){ 
+            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Zenit-jump';
           }
           break;
       }

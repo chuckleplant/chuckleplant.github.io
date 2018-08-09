@@ -98,6 +98,15 @@
                 alt="Zenit jump">
 
           
+          <div id="next-button" class="button-stripe-right"> 
+            <div class="but-container">
+                <span class="arrow-icon arrow-right">
+                  <i class="far fa-arrow-alt-circle-right"></i>
+                  <i class="fas fa-arrow-alt-circle-right"></i>
+                </span>            
+            </div>
+          </div>
+          
 
           
           <div id="prev-button" class="button-stripe-left"> 
@@ -262,28 +271,28 @@ s.setAttribute('data-timestamp', +new Date());
     if(prevButton != null)
     {
       prevButton.click(function (e) {
-          window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Within-trees';    
+          window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Tree-between-bricks';    
       });
     }
     
     if(nextButton != null)
     {
       nextButton.click(function (e) {
-        window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/';
+        window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Tombstones';
       });
     }
 
     document.onkeydown = function (e) {
       switch (e.keyCode) {
         case 37: //left
-          if('Within-trees' !="")
+          if('Tree-between-bricks' !="")
           {
-            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Within-trees';
+            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Tree-between-bricks';
           }
           break;
         case 39: //right
-          if('' !=""){ 
-            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/';
+          if('Tombstones' !=""){ 
+            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Tombstones';
           }
           break;
       }

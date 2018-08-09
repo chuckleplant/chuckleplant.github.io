@@ -271,28 +271,28 @@ s.setAttribute('data-timestamp', +new Date());
     if(prevButton != null)
     {
       prevButton.click(function (e) {
-          window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/No-you-didnt';    
+          window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Once-cozy-always-cozy';    
       });
     }
     
     if(nextButton != null)
     {
       nextButton.click(function (e) {
-        window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Once-cozy-always-cozy';
+        window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Light-facing-dark';
       });
     }
 
     document.onkeydown = function (e) {
       switch (e.keyCode) {
         case 37: //left
-          if('No-you-didnt' !="")
+          if('Once-cozy-always-cozy' !="")
           {
-            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/No-you-didnt';
+            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Once-cozy-always-cozy';
           }
           break;
         case 39: //right
-          if('Once-cozy-always-cozy' !=""){ 
-            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Once-cozy-always-cozy';
+          if('Light-facing-dark' !=""){ 
+            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Light-facing-dark';
           }
           break;
       }

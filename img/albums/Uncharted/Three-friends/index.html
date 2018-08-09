@@ -271,28 +271,28 @@ s.setAttribute('data-timestamp', +new Date());
     if(prevButton != null)
     {
       prevButton.click(function (e) {
-          window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/The-bear';    
+          window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Tombstones';    
       });
     }
     
     if(nextButton != null)
     {
       nextButton.click(function (e) {
-        window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Tombstones';
+        window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Cross-in-field';
       });
     }
 
     document.onkeydown = function (e) {
       switch (e.keyCode) {
         case 37: //left
-          if('The-bear' !="")
+          if('Tombstones' !="")
           {
-            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/The-bear';
+            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Tombstones';
           }
           break;
         case 39: //right
-          if('Tombstones' !=""){ 
-            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Tombstones';
+          if('Cross-in-field' !=""){ 
+            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Cross-in-field';
           }
           break;
       }

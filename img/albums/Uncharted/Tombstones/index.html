@@ -271,28 +271,28 @@ s.setAttribute('data-timestamp', +new Date());
     if(prevButton != null)
     {
       prevButton.click(function (e) {
-          window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Three-friends';    
+          window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Zenit-jump';    
       });
     }
     
     if(nextButton != null)
     {
       nextButton.click(function (e) {
-        window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Tree-between-bricks';
+        window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Three-friends';
       });
     }
 
     document.onkeydown = function (e) {
       switch (e.keyCode) {
         case 37: //left
-          if('Three-friends' !="")
+          if('Zenit-jump' !="")
           {
-            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Three-friends';
+            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Zenit-jump';
           }
           break;
         case 39: //right
-          if('Tree-between-bricks' !=""){ 
-            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Tree-between-bricks';
+          if('Three-friends' !=""){ 
+            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Three-friends';
           }
           break;
       }

@@ -271,28 +271,28 @@ s.setAttribute('data-timestamp', +new Date());
     if(prevButton != null)
     {
       prevButton.click(function (e) {
-          window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Blinded';    
+          window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Cave-frame';    
       });
     }
     
     if(nextButton != null)
     {
       nextButton.click(function (e) {
-        window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Bourne-shot';
+        window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Rock';
       });
     }
 
     document.onkeydown = function (e) {
       switch (e.keyCode) {
         case 37: //left
-          if('Blinded' !="")
+          if('Cave-frame' !="")
           {
-            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Blinded';
+            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Cave-frame';
           }
           break;
         case 39: //right
-          if('Bourne-shot' !=""){ 
-            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Bourne-shot';
+          if('Rock' !=""){ 
+            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Rock';
           }
           break;
       }

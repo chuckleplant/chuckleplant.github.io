@@ -271,28 +271,28 @@ s.setAttribute('data-timestamp', +new Date());
     if(prevButton != null)
     {
       prevButton.click(function (e) {
-          window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Fulfilled';    
+          window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Cave-arc';    
       });
     }
     
     if(nextButton != null)
     {
       nextButton.click(function (e) {
-        window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Guybrush-Threepstone';
+        window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Shower';
       });
     }
 
     document.onkeydown = function (e) {
       switch (e.keyCode) {
         case 37: //left
-          if('Fulfilled' !="")
+          if('Cave-arc' !="")
           {
-            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Fulfilled';
+            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Cave-arc';
           }
           break;
         case 39: //right
-          if('Guybrush-Threepstone' !=""){ 
-            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Guybrush-Threepstone';
+          if('Shower' !=""){ 
+            window.location.href = 'https://chuckleplant.github.io/img/albums/Uncharted/Shower';
           }
           break;
       }
