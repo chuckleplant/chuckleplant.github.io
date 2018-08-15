@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Photo geotagging using your Google location history</title>
-  <meta name="description" content="  Who controls the past controls the future. Who controls the present controls the past.">
+  <meta name="description" content="  He who controls the past controls the future. He who controls the present controls the past.  – George Orwell, 1984">
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?">
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="https://chuckleplant.github.io/2018/07/23/google-photos-geotag.html">
@@ -78,7 +78,9 @@
 
   <div class="post-content" itemprop="articleBody">
     <blockquote>
-  <p>Who controls the past controls the future. Who controls the present controls the past.</p>
+  <p>He who controls the past controls the future. He who controls the present controls the past.</p>
+
+  <p>– George Orwell, 1984</p>
 </blockquote>
 
 <p><a href="https://github.com/chuckleplant/blog/blob/master/scripts/location-geotag.py">Here</a>’s a script that runs on Python that can add GPS tags to your photos (jpg) given your Google location history. You have to download the location history from <a href="https://takeout.google.com/">https://takeout.google.com/</a> and run:</p>
@@ -101,9 +103,9 @@
 
 <p>One feature I like is geotagging. Google Photos will use your location history to deduce where the photo was taken. Then they’ll show you a nice map when visiting the image and you’ll go <em>‘Oh look I’ve been there!’</em></p>
 
-<p>However, I noticed that when exporting the photos out of Google, you don’t get the approximate geotag as metadata in your JPEG. This bothers me because the image gallery I’m using also shows you a small map if the image has GPS data in it.</p>
+<p>However, I noticed that when exporting the photos out of Google, you don’t get the approximate geotag as metadata in your JPEG. This bothers me because the image gallery I’m using also shows you a small map if the image has GPS data in it (<a href="/2018/07/23/japan-trip.html">check it out!</a>).</p>
 
-<p>After some research I found that it’s actually not possible to export the geotags. I did find that you can actually download your whole location history, all the location data Google has on you. It’s a lot of data depending on how long you’ve used a smartphone.</p>
+<p>After some research I found that it’s actually not possible to export the geotags from Google Photos. I did find that you can actually download your whole location history, all the location data Google has on you. It’s a lot of data depending on how long you’ve used a smartphone.</p>
 
 <div class="Container">
     <div class="Content">
@@ -148,15 +150,16 @@
 
 <p>I loaded the JSON and created a custom <code class="highlighter-rouge">Location</code> class which just registered the GPS info and the timestamp. I converted the timestamps to seconds when loading them. I also defined some operators to be able to sort and search the locations list.</p>
 
-<blockquote>
-  <p><em>Update:</em> The current implementation omits altitude because I only cared for the 2D map. I will update the script to include as much GPS information as possible.</p>
-</blockquote>
-
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#</span>
 <span class="c"># Note I construct directly from the JSON dictionary</span>
 <span class="c">#</span>
 <span class="k">class</span> <span class="nc">Location</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="p">{}):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">latitude</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">longitude</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">altitude</span> <span class="o">=</span> <span class="mi">0</span>
+
         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s">'timestampMs'</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="o">/</span> <span class="mi">1000</span>
@@ -164,6 +167,8 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">latitude</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
             <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="s">'longitudeE7'</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">longitude</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="s">'altitude'</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">altitude</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">other</span> <span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">timestamp</span>
@@ -179,12 +184,11 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">timestamp</span>
 </code></pre></div></div>
 
-<p>Using the <a href="https://docs.python.org/2/library/bisect.html">bisect</a> python module I could have O(log n) search times, which is as good as I can hope for. I had to reverse the locations because Google exports them in descending timestamp order.</p>
+<p>Using the <a href="https://docs.python.org/2/library/bisect.html">bisect</a> python module I could have <script type="math/tex">O(\log{}n)</script> search times, which is as good as I can hope for. I had to reverse the locations because Google exports them in descending timestamp order.</p>
 
 <p>I got the timestamp from my images using PIL black magic <code class="highlighter-rouge">image._getexif()[36867]</code>. And then it was a matter of finding the location with the closest timestamp to my image. From <a href="https://stackoverflow.com/a/12141511/2628257">SO</a>:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">find_closest_in_time</span><span class="p">(</span><span class="n">locations</span><span class="p">,</span> <span class="n">a_location</span><span class="p">):</span>
-    <span class="k">print</span> <span class="s">'Finding closest element'</span>
     <span class="n">pos</span> <span class="o">=</span> <span class="n">bisect_left</span><span class="p">(</span><span class="n">locations</span><span class="p">,</span> <span class="n">a_location</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">pos</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">locations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -206,10 +210,18 @@
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#</span>
 <span class="c"># piexif library usage to add GPS info to an image</span>
 <span class="c">#</span>
+<span class="n">approx_location</span> <span class="o">=</span> <span class="n">find_closest_in_time</span><span class="p">(</span><span class="n">my_locations</span><span class="p">,</span> <span class="n">curr_loc</span><span class="p">)</span>
+<span class="n">hours_away</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">approx_location</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">-</span> <span class="n">time_jpeg_unix</span><span class="p">)</span> <span class="o">/</span> <span class="mi">3600</span>
+
 <span class="k">if</span><span class="p">(</span><span class="n">hours_away</span> <span class="o">&lt;</span> <span class="n">hours_threshold</span><span class="p">):</span>
-    <span class="n">exif_dict</span> <span class="o">=</span> <span class="n">piexif</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">image_file</span><span class="p">)</span>    
+    <span class="c"># Google stores these as x-e7</span>
+    <span class="n">lat_f</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">approx_location</span><span class="o">.</span><span class="n">latitude</span><span class="p">)</span> <span class="o">/</span> <span class="mf">10000000.0</span>
+    <span class="n">lon_f</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">approx_location</span><span class="o">.</span><span class="n">longitude</span><span class="p">)</span> <span class="o">/</span> <span class="mf">10000000.0</span>
+    
+    <span class="n">exif_dict</span> <span class="o">=</span> <span class="n">piexif</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">image_file</span><span class="p">)</span>        
     <span class="n">exif_dict</span><span class="p">[</span><span class="s">"GPS"</span><span class="p">][</span><span class="n">piexif</span><span class="o">.</span><span class="n">GPSIFD</span><span class="o">.</span><span class="n">GPSVersionID</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="n">exif_dict</span><span class="p">[</span><span class="s">"GPS"</span><span class="p">][</span><span class="n">piexif</span><span class="o">.</span><span class="n">GPSIFD</span><span class="o">.</span><span class="n">GPSAltitudeRef</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">exif_dict</span><span class="p">[</span><span class="s">"GPS"</span><span class="p">][</span><span class="n">piexif</span><span class="o">.</span><span class="n">GPSIFD</span><span class="o">.</span><span class="n">GPSAltitudeRef</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">approx_location</span><span class="o">.</span><span class="n">altitude</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">1</span>        
+    <span class="n">exif_dict</span><span class="p">[</span><span class="s">"GPS"</span><span class="p">][</span><span class="n">piexif</span><span class="o">.</span><span class="n">GPSIFD</span><span class="o">.</span><span class="n">GPSAltitude</span><span class="p">]</span> <span class="o">=</span> <span class="n">change_to_rational</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">approx_location</span><span class="o">.</span><span class="n">altitude</span><span class="p">))</span>
     <span class="n">exif_dict</span><span class="p">[</span><span class="s">"GPS"</span><span class="p">][</span><span class="n">piexif</span><span class="o">.</span><span class="n">GPSIFD</span><span class="o">.</span><span class="n">GPSLatitudeRef</span><span class="p">]</span> <span class="o">=</span> <span class="s">'S'</span> <span class="k">if</span> <span class="n">lat_f</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s">'N'</span>
     <span class="n">exif_dict</span><span class="p">[</span><span class="s">"GPS"</span><span class="p">][</span><span class="n">piexif</span><span class="o">.</span><span class="n">GPSIFD</span><span class="o">.</span><span class="n">GPSLongitudeRef</span><span class="p">]</span> <span class="o">=</span> <span class="s">'W'</span> <span class="k">if</span> <span class="n">lon_f</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s">'E'</span>
 
@@ -217,7 +229,6 @@
     <span class="n">lng_deg</span> <span class="o">=</span> <span class="n">to_deg</span><span class="p">(</span><span class="n">lon_f</span><span class="p">,</span> <span class="p">[</span><span class="s">"W"</span><span class="p">,</span> <span class="s">"E"</span><span class="p">])</span>
     <span class="n">exiv_lat</span> <span class="o">=</span> <span class="p">(</span><span class="n">change_to_rational</span><span class="p">(</span><span class="n">lat_deg</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">change_to_rational</span><span class="p">(</span><span class="n">lat_deg</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">change_to_rational</span><span class="p">(</span><span class="n">lat_deg</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
     <span class="n">exiv_lng</span> <span class="o">=</span> <span class="p">(</span><span class="n">change_to_rational</span><span class="p">(</span><span class="n">lng_deg</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">change_to_rational</span><span class="p">(</span><span class="n">lng_deg</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">change_to_rational</span><span class="p">(</span><span class="n">lng_deg</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
-
     <span class="n">exif_dict</span><span class="p">[</span><span class="s">"GPS"</span><span class="p">][</span><span class="n">piexif</span><span class="o">.</span><span class="n">GPSIFD</span><span class="o">.</span><span class="n">GPSLatitude</span><span class="p">]</span> <span class="o">=</span> <span class="n">exiv_lat</span>
     <span class="n">exif_dict</span><span class="p">[</span><span class="s">"GPS"</span><span class="p">][</span><span class="n">piexif</span><span class="o">.</span><span class="n">GPSIFD</span><span class="o">.</span><span class="n">GPSLongitude</span><span class="p">]</span> <span class="o">=</span> <span class="n">exiv_lng</span>
     
