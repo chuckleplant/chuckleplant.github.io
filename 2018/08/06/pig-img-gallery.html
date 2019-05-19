@@ -54,6 +54,7 @@
       <div class="trigger">
           <a class="page-link" href="/about">About</a>
           <a class="page-link" href="/albums">Albums</a>
+          <a class="page-link" href="/snaps">Snaps</a>
           <a class="page-link" href="/life-drawing">Life Drawing</a>
           <a class="page-link" href="/archive">Archive</a>
       
@@ -94,7 +95,7 @@
 </div>
 <p><span class="caption" style="font-size: 80%"><i>The photo page shows all relevant information from each image. The map static image was changed to occupy the blog’s wrapper width.</i></span></p>
 
-<p>A big change on performance was precomputing all the exif data to be used in the photo page. In the original JPG these were called via Liquid script when generating the page. This happened each time Jekyll was built. Given that I made a script to set up photos and thumbnails in Pytho, I also made it so that all the required exif data was pregenerated just once. It is saved to a YAML file and used directly by Jekyll. The site generation time was basically halved by this.</p>
+<p>A big change on performance was precomputing all the exif data to be used in the photo page. In the original JPG these were called via Liquid script when generating the page. This happened each time Jekyll was built. Given that I made a script to set up photos and thumbnails in Python, I also made it so that all the required exif data was pregenerated just once. It is saved to a YAML file and used directly by Jekyll. The site generation time was basically halved by this.</p>
 
 <h2 id="changes-to-progressive-image-grid">Changes to Progressive Image Grid</h2>
 
@@ -216,7 +217,7 @@ s.setAttribute('data-timestamp', +new Date());
       </div>
 
       <div class="footer-col footer-col-3">
-        <p>Sergio Basurco's personal portfolio. I'm a software developer based in Barcelona. Have fun browsing my little projects.
+        <p>Sergio Basurco's personal portfolio. I'm a game developer based in Madrid. Have fun browsing my little projects.
 </p>
       </div>
     </div>
