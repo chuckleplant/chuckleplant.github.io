@@ -306,28 +306,28 @@ s.setAttribute('data-timestamp', +new Date());
     if(prevButton != null)
     {
       prevButton.click(function (e) {
-          window.location.href = 'https://chuckleplant.github.io/img/albums/Snaps/Old-yellow-bricks';    
+          window.location.href = 'https://chuckleplant.github.io/img/albums/Snaps/Flags';    
       });
     }
     
     if(nextButton != null)
     {
       nextButton.click(function (e) {
-        window.location.href = 'https://chuckleplant.github.io/img/albums/Snaps/Flags';
+        window.location.href = 'https://chuckleplant.github.io/img/albums/Snaps/Old-yellow-bricks';
       });
     }
 
     document.onkeydown = function (e) {
       switch (e.keyCode) {
         case 37: //left
-          if('Old-yellow-bricks' !="")
+          if('Flags' !="")
           {
-            window.location.href = 'https://chuckleplant.github.io/img/albums/Snaps/Old-yellow-bricks';
+            window.location.href = 'https://chuckleplant.github.io/img/albums/Snaps/Flags';
           }
           break;
         case 39: //right
-          if('Flags' !=""){ 
-            window.location.href = 'https://chuckleplant.github.io/img/albums/Snaps/Flags';
+          if('Old-yellow-bricks' !=""){ 
+            window.location.href = 'https://chuckleplant.github.io/img/albums/Snaps/Old-yellow-bricks';
           }
           break;
       }
