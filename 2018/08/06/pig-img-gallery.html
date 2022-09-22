@@ -82,7 +82,7 @@
 
 <h2 id="changes-to-jekyll-photo-gallery">Changes to Jekyll Photo Gallery</h2>
 
-<p>First I made a few changes to the <code class="highlighter-rouge">photo.html</code> layout from the original JPG. I changed where the map was placed and increased the map size for a higher resolution view. I also made the elements responsive and added a few icons based on the flickr layout.</p>
+<p>First I made a few changes to the <code class="language-plaintext highlighter-rouge">photo.html</code> layout from the original JPG. I changed where the map was placed and increased the map size for a higher resolution view. I also made the elements responsive and added a few icons based on the flickr layout.</p>
 
 <p>The image layout acts in a similar way to how YouTube does for videos, it keeps a maximum height, which responds to the user shrinking the window width. I also added arrows on each side for feedback, this way the users know they can navigate by clicking.</p>
 
@@ -99,7 +99,7 @@
 
 <p>The first challenge was to make PIG usable from Jekyll. Luckily JPG had already set the pathway to do this. I only had to replace the Justified Gallery code with PIG code.</p>
 
-<p>For the actual PIG code I did have to make the images clickable, I added a <code class="highlighter-rouge">url</code> field for the images list. Then in JavaScript I created a <code class="highlighter-rouge">div</code> element to act as the captions. I shamelessly copied the captions from Justified Gallery, including the hover behaviour and animations.</p>
+<p>For the actual PIG code I did have to make the images clickable, I added a <code class="language-plaintext highlighter-rouge">url</code> field for the images list. Then in JavaScript I created a <code class="language-plaintext highlighter-rouge">div</code> element to act as the captions. I shamelessly copied the captions from Justified Gallery, including the hover behaviour and animations.</p>
 
 <h2 id="how-to-use-this-in-your-jekyll-site">How to use this in your Jekyll site</h2>
 
@@ -107,7 +107,7 @@
 
 <p>All you need to do to set it up is place your images in the following folder structure:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./
     img/
         albums/
             Hawaii/
@@ -116,7 +116,7 @@
             ...
 </code></pre></div></div>
 
-<p>Then run the <code class="highlighter-rouge">setup-photos.py</code> script, in the scripts folder. This script will do the following:</p>
+<p>Then run the <code class="language-plaintext highlighter-rouge">setup-photos.py</code> script, in the scripts folder. This script will do the following:</p>
 
 <ul>
   <li>Rotate your images according to the orientation specified by the metadata.</li>
@@ -127,10 +127,10 @@
 
 <p>Use the following snippet to insert an album anywhere in a post.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> { %includeGallery ALBUM_ID% }
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> { %includeGallery ALBUM_ID% }
 </code></pre></div></div>
 
-<p>That should be it, run <code class="highlighter-rouge">jekyll serve --watch</code> to generate your site and you should be able to see your albums.</p>
+<p>That should be it, run <code class="language-plaintext highlighter-rouge">jekyll serve --watch</code> to generate your site and you should be able to see your albums.</p>
 
 
   </div>
@@ -215,7 +215,7 @@ s.setAttribute('data-timestamp', +new Date());
       </div>
 
       <div class="footer-col footer-col-3">
-        <p>Sergio Basurco's personal portfolio. I'm a game developer based in Madrid. Have fun browsing my little projects.
+        <p>Sergio Basurco's personal portfolio. I'm a game developer based in Barcelona. Have fun browsing my little projects.
 </p>
       </div>
     </div>
