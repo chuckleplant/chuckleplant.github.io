@@ -1,4 +1,4 @@
-import os
+import os, sys
 import shutil
 from subprocess import call
 import git
@@ -27,33 +27,33 @@ setup_photos_script = os.path.join(root_dir, 'scripts/setup-photos.py')
 
 os.chdir(root_dir)
 shutil.rmtree(thumbnail_dir, ignore_errors=True)
-execfile(setup_photos_script)
+with open(setup_photos_script, 'r') as f:
+    exec(f.read())
+
 if args.push:
-    call(['bundle','exec','jekyll', 'build', '--destination','_site'])
+    print("\nBuild Jekyll site")
+    if sys.platform != "win32":
+        call(['bundle','exec','jekyll', 'build', '--destination','_site'])
+    else:
+        os.system('bundle exec jekyll build --destination _site')
     repo = git.Repo(search_parent_directories=True)
     sha = repo.head.object.hexsha
     os.chdir(site_dir)
-    git_commit_ret = call(['git','cma','deploying from '+sha])
-    if git_commit_ret is 0:
-        if call(['git','push']) is 0:
-            print 'Blog push success'
-            web_repo = git.Repo(search_parent_directories=True)
-            web_sha = web_repo.head.object.hexsha
-            web_dir = os.path.join(root_dir,'../website')
-            os.chdir(web_dir)
-            old_content = os.listdir(web_dir)
-            for clean_up in old_content:
-                if not clean_up.endswith('.git'):    
-                    remove(clean_up)
-            copy_tree(site_dir, web_dir)
-            web_commit_ret = call(['git','cma','deploying from '+web_sha])
-            if web_commit_ret is 0:
-                if call(['git','push']) is 0:
-                    print 'Web Deployment succes'
-        else:
-            print 'Deployment failed, could not push'
+
+    print("\nAdd to git repo and commit")
+    git_commit_ret = call(['git','commit', '-am', 'deploying from '+sha])
+    if git_commit_ret == 0:
+        print("Commited to blog repo, ready to submit")
+        web_dir = os.path.join(root_dir,'../website')
+        os.chdir(web_dir)
+        old_content = os.listdir(web_dir)
+        for clean_up in old_content:
+            if not clean_up.endswith('.git'):    
+                remove(clean_up)
+        copy_tree(site_dir, web_dir)
+        print("Copied to website repo, ready to submit")
     else:
-        print 'Deployment failed, could not commit _site'
+        print ('Deployment failed, could not commit _site')
 else:
-    print 'Deployment not requested'
+    print ('Deployment not requested')
 
