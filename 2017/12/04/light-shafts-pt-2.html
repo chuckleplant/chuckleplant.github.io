@@ -126,12 +126,14 @@
 
 <p>Eq. 3 computes, for a whole ray, the accumulated light value based on the media it traverses. What we’ll do is march on screen space, accumulating by sampling along the ray’s path towards any given pixel.</p>
 
-<div class="Container">
-    <div class="Content">
-<img class="imagedropshadow" src="/images/cheating-shaft.png" alt="Each dot represents a sample, we omit the samples that have an occluder. This makes the pixels with no ocluders (on screen space) be brighter." />  
+<div class="image-container">
+    <div class="Container">
+        <div class="Content">
+            <img class="imagedropshadow" src="/images/cheating-shaft.png" alt="Each dot represents a sample, we omit the samples that have an occluder. This makes the pixels with no ocluders (on screen space) be brighter." style="width: auto;" />
+        </div>
     </div>
+    <span class="caption" style="font-size: 80%"><i>Each dot represents a sample, we omit the samples that have an occluder. This makes the pixels with no ocluders (on screen space) be brighter.</i></span>
 </div>
-<p><span class="caption" style="font-size: 80%"><i>Each dot represents a sample, we omit the samples that have an occluder. This makes the pixels with no ocluders (on screen space) be brighter.</i></span></p>
 
 <h2 id="the-sum">The sum</h2>
 
@@ -143,26 +145,32 @@
 
 <p>The further the pixel is from the light source, the dimmer light accumulation is.</p>
 
-<div class="Container">
-    <div class="Content">
-<img class="imagedropshadow" src="/images/red-dead-blackness.png" alt="In our first render pass we render just the scene in black and the light source. Note that we paint the sun red in this case so that the light shifts from white at maximum intensity to a dim red (What I like to call dead red)." />  
+<div class="image-container">
+    <div class="Container">
+        <div class="Content">
+            <img class="imagedropshadow" src="/images/red-dead-blackness.png" alt="In our first render pass we render just the scene in black and the light source. Note that we paint the sun red in this case so that the light shifts from white at maximum intensity to a dim red (What I like to call dead red)." style="width: auto;" />
+        </div>
     </div>
+    <span class="caption" style="font-size: 80%"><i>In our first render pass we render just the scene in black and the light source. Note that we paint the sun red in this case so that the light shifts from white at maximum intensity to a dim red (What I like to call dead red).</i></span>
 </div>
-<p><span class="caption" style="font-size: 80%"><i>In our first render pass we render just the scene in black and the light source. Note that we paint the sun red in this case so that the light shifts from white at maximum intensity to a dim red (What I like to call dead red).</i></span></p>
 
-<div class="Container">
-    <div class="Content">
-<img class="imagedropshadow" src="/images/red-dead-scene.png" alt="Our second render pass draws the scene as we want it, in this case just a silhouette with the sun behind it. Note that we draw the sun as a white circle too without the shafts." />  
+<div class="image-container">
+    <div class="Container">
+        <div class="Content">
+            <img class="imagedropshadow" src="/images/red-dead-scene.png" alt="Our second render pass draws the scene as we want it, in this case just a silhouette with the sun behind it. Note that we draw the sun as a white circle too without the shafts." style="width: auto;" />
+        </div>
     </div>
+    <span class="caption" style="font-size: 80%"><i>Our second render pass draws the scene as we want it, in this case just a silhouette with the sun behind it. Note that we draw the sun as a white circle too without the shafts.</i></span>
 </div>
-<p><span class="caption" style="font-size: 80%"><i>Our second render pass draws the scene as we want it, in this case just a silhouette with the sun behind it. Note that we draw the sun as a white circle too without the shafts.</i></span></p>
 
-<div class="Container">
-    <div class="Content">
-<img class="imagedropshadow" src="/images/red-dead-shaft.png" alt="Last we run a final pass that samples for each fragment the brightness energy in the direction of the light source. This results in the shafts of light passing through the occluders." />  
+<div class="image-container">
+    <div class="Container">
+        <div class="Content">
+            <img class="imagedropshadow" src="/images/red-dead-shaft.png" alt="Last we run a final pass that samples for each fragment the brightness energy in the direction of the light source. This results in the shafts of light passing through the occluders." style="width: auto;" />
+        </div>
     </div>
+    <span class="caption" style="font-size: 80%"><i>Last we run a final pass that samples for each fragment the brightness energy in the direction of the light source. This results in the shafts of light passing through the occluders.</i></span>
 </div>
-<p><span class="caption" style="font-size: 80%"><i>Last we run a final pass that samples for each fragment the brightness energy in the direction of the light source. This results in the shafts of light passing through the occluders.</i></span></p>
 
 <h1 id="application-in-games">Application in games</h1>
 
