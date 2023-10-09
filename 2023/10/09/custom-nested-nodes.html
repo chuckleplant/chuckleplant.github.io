@@ -205,10 +205,17 @@
 
 <p>For this example, I will implement a basic node that blends two poses. The blend weight will be determined by a Curve asset, which is evaluated in a loop. Then we will use the Modify Curve node to relay curve information to the animation pipeline.</p>
 
+<style>
+    .audiovisual {
+        margin: 5px;
+        border-radius: .5rem;
+    }
+</style>
+
 <div class="image-container">
     <div class="Container">
         <div class="Content">
-            <img class="audiovisual" src="/images/posts/nested-node-nodes.png" alt="The anim nodes we will put inside our custom node." style="width: auto;" />
+            <img class="audiovisual" src="/images/posts/nested-node-nodes.png" alt="The anim nodes we will put inside our custom node." style="width: auto; background-color: var(--image-background);" />
         </div>
     </div>
     <span class="caption" style="font-size: 80%"><i>The anim nodes we will put inside our custom node.</i></span>
@@ -328,10 +335,17 @@
 
 <p>Using the <code class="language-plaintext highlighter-rouge">showdebug ANIMATION</code> command we can see all debug data reported by AnimNodes. In our case we added the curve time and the weight that’s being output as an Animation Curve.</p>
 
+<style>
+    .audiovisual {
+        margin: 5px;
+        border-radius: .5rem;
+    }
+</style>
+
 <div class="image-container">
     <div class="Container">
         <div class="Content">
-            <img class="audiovisual" src="/images/posts/nested-nodes-debug.png" alt="" style="width: auto;" />
+            <img class="audiovisual" src="/images/posts/nested-nodes-debug.png" alt="" style="width: auto; background-color: var(--image-background);" />
         </div>
     </div>
     <span class="caption" style="font-size: 80%"><i></i></span>
