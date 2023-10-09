@@ -135,8 +135,9 @@
 </svg>
  <!-- Include SVG file -->
   
+  <script src="https://cdn.jsdelivr.net/npm/darkreader@4.9.44/darkreader.js"></script>
   <script type="text/javascript" async
-   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
   </script>
   <script type="text/x-mathjax-config">
     MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
@@ -148,20 +149,18 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
+    
     gtag('config', 'UA-123985810-1');
-  </script>
+    </script>
+    <script src="/js/theme.js"></script>
 </head>
 
   <body>
     <header class="site-header">
-
   <div class="wrapper">
-
     <a class="site-title" href="/">
       chuckleplant<span class="title-dot">.</span>
     </a>
-
     <nav class="site-nav">
       <a href="#" class="menu-icon">
         <svg viewBox="0 0 18 15">
@@ -170,30 +169,83 @@
           <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
         </svg>
       </a>
-
       <div class="trigger">
           <a class="page-link" href="/about">About</a>
           <a class="page-link" href="/albums">Albums</a>
           <a class="page-link" href="/photos">Photos</a>
           <a class="page-link" href="/drawings">Drawings</a>
           <a class="page-link" href="/archive">Archive</a>
-      
+          <!-- <a class="dark-mode-button" >
+            <i id="icon-dark" class="fa fa-moon"></i>
+            <span id="dark-text">Sunset</span>
+          </a> -->
       </div>
     </nav>
-
-    
-
   </div>
-
 </header>
 
     <div class="page-content">
       <div class="wrapper">
         <div class="home">
     
-    <h1 class="page-heading">Posts</h1>
+    
     
     <div class="wrapper">
+         <!-- Changed site.posts to paginator.posts -->
+        
+        
+        <a href="/2023/10/09/custom-nested-nodes.html" class="card-link">
+            <div class="card">
+                
+                <!-- Text Section -->
+                <div class="card-text">
+                    <h2>Anim Blueprint logic in Code</h2>
+                    
+                    
+                    <p>Blueprints represent us humans. C++ represents the Gods of Olympus, who envy Blueprints because of their mortality. Blueprints live a happy and simple life, and they dream of one day being as powerful as the Gods. C++, on the other hand, is doomed to an eternity of pain. Even though they’re weak and hideous, Blueprints get to play with the mortals. This is why Code despises Blueprints and looks down on them from the heights of Mount Performance.
+
+</p>
+                    
+                    
+                    <!-- Date always at the bottom -->
+                    <div class="card-meta">
+                        <span>Oct 9, 2023</span>
+                        <!-- Icons at bottom right corner -->
+                        <div class="card-tags">
+                            
+                                
+                                
+                                    <svg title="unreal">
+                                        <use xlink:href="#unreal"></use>
+                                    </svg>
+                                
+                            
+                                
+                                
+                                    <svg title="animation">
+                                        <use xlink:href="#animation"></use>
+                                    </svg>
+                                
+                            
+                                
+                                
+                                    <svg title="code">
+                                        <use xlink:href="#code"></use>
+                                    </svg>
+                                
+                            
+                        </div>
+                    </div>
+
+                </div>
+                
+                <!-- Image Section  -->
+                <div class="card-image" style="background-image: url('https://chuckleplant.github.io/img/600/hades-nodes.png')"></div>
+                
+            </div>
+        </a>
+
+        
          <!-- Changed site.posts to paginator.posts -->
         
         
@@ -400,64 +452,6 @@
                 
                 <!-- Image Section  -->
                 <div class="card-image" style="background-image: url('https://chuckleplant.github.io/img/600/photo-page.png')"></div>
-                
-            </div>
-        </a>
-
-        
-         <!-- Changed site.posts to paginator.posts -->
-        
-        
-        <a href="/2018/07/23/japan-trip.html" class="card-link">
-            <div class="card">
-                
-                <!-- Text Section -->
-                <div class="card-text">
-                    <h2>Trip to Japan</h2>
-                    
-                    
-                    <p>I went to Japan last year. Precisely for this trip I bought a decent digital camera and started taking pictures as a hobby. I spent some time editing some of the photos, here’s a small selection of my favourites.
-
-</p>
-                    
-                    
-                    <!-- Date always at the bottom -->
-                    <div class="card-meta">
-                        <span>Jul 23, 2018</span>
-                        <!-- Icons at bottom right corner -->
-                        <div class="card-tags">
-                            
-                                
-                                
-                                    <svg title="album">
-                                        <use xlink:href="#album"></use>
-                                    </svg>
-                                
-                            
-                                
-                                
-                                    <svg title="photography">
-                                        <use xlink:href="#photography"></use>
-                                    </svg>
-                                
-                            
-                                
-                                
-                            
-                                
-                                
-                                    <svg title="world">
-                                        <use xlink:href="#world"></use>
-                                    </svg>
-                                
-                            
-                        </div>
-                    </div>
-
-                </div>
-                
-                <!-- Image Section  -->
-                <div class="card-image" style="background-image: url('https://chuckleplant.github.io/img/600/P8260261.jpg')"></div>
                 
             </div>
         </a>

@@ -136,8 +136,9 @@
 </svg>
  <!-- Include SVG file -->
   
+  <script src="https://cdn.jsdelivr.net/npm/darkreader@4.9.44/darkreader.js"></script>
   <script type="text/javascript" async
-   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
   </script>
   <script type="text/x-mathjax-config">
     MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
@@ -149,20 +150,18 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
+    
     gtag('config', 'UA-123985810-1');
-  </script>
+    </script>
+    <script src="/js/theme.js"></script>
 </head>
 
   <body>
     <header class="site-header">
-
   <div class="wrapper">
-
     <a class="site-title" href="/">
       chuckleplant<span class="title-dot">.</span>
     </a>
-
     <nav class="site-nav">
       <a href="#" class="menu-icon">
         <svg viewBox="0 0 18 15">
@@ -171,21 +170,19 @@
           <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
         </svg>
       </a>
-
       <div class="trigger">
           <a class="page-link" href="/about">About</a>
           <a class="page-link" href="/albums">Albums</a>
           <a class="page-link" href="/photos">Photos</a>
           <a class="page-link" href="/drawings">Drawings</a>
           <a class="page-link" href="/archive">Archive</a>
-      
+          <!-- <a class="dark-mode-button" >
+            <i id="icon-dark" class="fa fa-moon"></i>
+            <span id="dark-text">Sunset</span>
+          </a> -->
       </div>
     </nav>
-
-    
-
   </div>
-
 </header>
 
     <div class="page-content">
@@ -207,7 +204,7 @@
 <div class="image-container">
     <div class="Container">
         <div class="Content">
-            <img class="imagedropshadow" src="/images/red-dead-shaft.png" alt="Light shafts sample image, generated with the *Isaac Hayes Wallpaper Generator* tool, available in the second part of this entry. The image is from Rockstar's Red Dead Redemption 2 concept art." style="width: auto;" />
+            <img class="audiovisual" src="/images/red-dead-shaft.png" alt="Light shafts sample image, generated with the *Isaac Hayes Wallpaper Generator* tool, available in the second part of this entry. The image is from Rockstar's Red Dead Redemption 2 concept art." style="width: auto;" />
         </div>
     </div>
     <span class="caption" style="font-size: 80%"><i>Light shafts sample image, generated with the *Isaac Hayes Wallpaper Generator* tool, available in the second part of this entry. The image is from Rockstar's Red Dead Redemption 2 concept art.</i></span>
@@ -223,9 +220,13 @@
 
 <h2 id="rendering-equation-review">Rendering equation review</h2>
 
-<p><img src="/images/rendering-equation-drawing.png" alt="renderineq" /></p>
+<blockquote>
+  <p>This drawing and explanation were featured in <a href="https://programs.sigchi.org/chi/2022/program/content/68734">CHI’22: ACM Conference on Human Factors in Computing Systems</a>.</p>
+</blockquote>
 
-\[\definecolor{steadyblue}{RGB}{0,76,212} %004CD4
+<p><img src="/images/rendering-eq-light-dark.png" alt="renderineq" /></p>
+
+\[\definecolor{steadyblue}{RGB}{58, 125, 242} %3a7df2
 \definecolor{lobster}{RGB}{185,138,162} %B98AA2
 \definecolor{mars}{RGB}{255,165,44} %FFA52C
 \definecolor{rosamund}{RGB}{198,73,255} %C649FF
@@ -235,9 +236,9 @@
 \definecolor{sea}{RGB}{41,153,124}  %29997C 
 \definecolor{flower}{RGB}{255,85,149} %FF5595
 
-\color{steadyblue}{L_{\text{o}}(\mathbf x,\, \omega_{\text{o}})} \color{black}{\,=\,} \color{mars}{L_e(\mathbf x,\, \omega_{\text{o}})} \color{black}{\ +\,} \color{bleu}{\int_\Omega} \color{flower}{f_r(\mathbf x,\, \omega_{\text{i}},\, \omega_{\text{o}})\,} \color{rosamund}{L_{\text{i}}(\mathbf x,\, \omega_{\text{i}})\,} \color{pistacho}{(\omega_{\text{i}}\,\cdot\,\mathbf n)\,} \color{bleu}{\operatorname d \omega_{\text{i}}}\]
+\textcolor{steadyblue}{L_{\text{o}}(\mathbf x,\, \omega_{\text{o}})} {\,=\,} \textcolor{mars}{L_e(\mathbf x,\, \omega_{\text{o}})} {\ +\,} \textcolor{bleu}{\int_\Omega} \textcolor{flower}{f_r(\mathbf x,\, \omega_{\text{i}},\, \omega_{\text{o}})\,} \textcolor{rosamund}{L_{\text{i}}(\mathbf x,\, \omega_{\text{i}})\,} \textcolor{pistacho}{(\omega_{\text{i}}\,\cdot\,\mathbf n)\,} \textcolor{bleu}{\operatorname d \omega_{\text{i}}}\]
 
-<p>To find <font color="#004CD4">the light towards the viewer from a specific point</font>, we sum the <font color="#FFA52C">light emitted from such point</font> plus <font color="#49D6FF">the integral within the unit hemisphere</font> of <font color="#C649FF">the light coming from a any given direction</font> multiplied by the <font color="#FF5595">chances of such light rays bouncing towards the viewer</font><sup id="fnref:100" role="doc-noteref"><a href="#fn:100" class="footnote" rel="footnote">1</a></sup> and also by <font color="#76A327">the irradiance factor over the normal at the point</font>.<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">2</a></sup>\(^,\)<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote" rel="footnote">3</a></sup></p>
+<p>To find <font color="#3a7df2">the light towards the viewer from a specific point</font>, we sum the <font color="#FFA52C">light emitted from such point</font> plus <font color="#49D6FF">the integral within the unit hemisphere</font> of <font color="#C649FF">the light coming from a any given direction</font> multiplied by the <font color="#FF5595">chances of such light rays bouncing towards the viewer</font><sup id="fnref:100" role="doc-noteref"><a href="#fn:100" class="footnote" rel="footnote">1</a></sup> and also by <font color="#76A327">the irradiance factor over the normal at the point</font>.<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">2</a></sup>\(^,\)<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote" rel="footnote">3</a></sup></p>
 
 <p>Note that <font color="C649FF">incoming light</font> is also computed by that very formula, which makes this exhaustingly recursive.</p>
 
@@ -260,7 +261,14 @@
 
 <p>This helps us understand how scattering is first modelled in Nvidia’s GPU gem on volumetric light scattering<sup id="fnref:7" role="doc-noteref"><a href="#fn:7" class="footnote" rel="footnote">6</a></sup>. Let \(s\) be the distance through the media and \(\theta\) the angle between the viewer and the light beam:</p>
 
-<p><img src="/images/rendering-scatter-terms.png" alt="scattering-terms" /></p>
+<div class="image-container">
+    <div class="Container">
+        <div class="Content">
+            <img class="audiovisual" src="/images/rendering-scatter-terms.png" alt="" style="width: auto;" />
+        </div>
+    </div>
+    <span class="caption" style="font-size: 80%"><i></i></span>
+</div>
 
 \[\definecolor{steadyblue}{RGB}{0,76,212} %004CD4
 \definecolor{lobster}{RGB}{185,138,162} %B98AA2
@@ -272,7 +280,7 @@
 \definecolor{sea}{RGB}{41,153,124}  %29997C 
 \definecolor{greenbean}{RGB}{76,153,0}  %4C9900 
 
-\color{red}{L(s,\,\theta)} \color{black}{\,=\,} \color{steadyblue}{L_\text{o}} \color{rosamund}{\,e^{-\tau s}} \color{black}{\,+\,} \frac{1}{\tau} \color{orange}{\,E_{sun}} \color{greenbean}{\,S(\theta)} \color{black}{\,(1 \,-\, } \color{rosamund}{e^{-\tau s}}\color{black}{)}\]
+\textcolor{red}{L(s,\,\theta)} {\,=\,} \textcolor{steadyblue}{L_\text{o}} \textcolor{rosamund}{\,e^{-\tau s}} {\,+\,} \frac{1}{\tau} \textcolor{orange}{\,E_{sun}} \textcolor{greenbean}{\,S(\theta)} {\,(1 \,-\, } \textcolor{rosamund}{e^{-\tau s}}{)}\]
 
 <p>The <font color="FF0000">light accounting for volumetric scattering</font> is a linear interpolation <font color="C649FF">weighed by the extinction constant</font>. Note how we interpolate between the <font color="004CD4">light computed at a given point</font> and the light due to scattering, which is a product of the <font color="FFAF00">source illumination</font> from the sun (or light source) and the <font color="4C9900">angular scattering term</font> according to Rayleigh and Mie properties.</p>
 
@@ -285,7 +293,7 @@
 <div class="image-container">
     <div class="Container">
         <div class="Content">
-            <img class="imagedropshadow" src="/images/rayleigh-meow.png" alt="Rayleigh and Mie scattering describes how light scatters off of molecules in a medium depending on the size of those molecules. Smaller molecules respond to Mie scattering more than Rayleigh and viceversa.[^44]" style="width: auto;" />
+            <img class="audiovisual" src="/images/rayleigh-meow.png" alt="Rayleigh and Mie scattering describes how light scatters off of molecules in a medium depending on the size of those molecules. Smaller molecules respond to Mie scattering more than Rayleigh and viceversa.[^44]" style="width: auto;" />
         </div>
     </div>
     <span class="caption" style="font-size: 80%"><i>Rayleigh and Mie scattering describes how light scatters off of molecules in a medium depending on the size of those molecules. Smaller molecules respond to Mie scattering more than Rayleigh and viceversa.[^44]</i></span>
@@ -295,7 +303,7 @@
 
 <p>Last but not least, we need to take occluders into the equation. Let \(\phi\) represent the ray from the light emitter towards the observed point:</p>
 
-\[L(s,\,\theta,\,\phi) = (1 \,-\, \color{orange}{D(\phi)}\color{black}{)} \color{red}{\,L(s,\,\theta)}\]
+\[L(s,\,\theta,\,\phi) = (1 \,-\, \textcolor{orange}{D(\phi)}{)} \textcolor{red}{\,L(s,\,\theta)}\]
 
 <p>Is the light accounting for both <font color="FF0000">volumetric light scattering</font> and <font color="FFA600">the opacity term of all occluders</font>, which is the total opacity of the ocluders along the ray.</p>
 
